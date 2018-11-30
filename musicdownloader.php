@@ -1,5 +1,5 @@
 <?php
-
+include(downloader.php);
 $helpText = "help";
 $howToUseText = "how to use";
 
