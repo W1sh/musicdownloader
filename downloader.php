@@ -1,8 +1,11 @@
 <?php
+include 'vendor\madcodez\youtube-downloader\src\YTDownloader.php';
 final class Downloader{
+    private $yt;
     public static function Instance(){
         static $inst = null;
         if ($inst === null) {
+            $yt = new YTDownloader();
             $inst = new UserFactory();
         }
         return $inst;
@@ -17,6 +20,7 @@ final class Downloader{
         //TODO:
     }
     public function singleDownload($url): void{
+        // ignore unknows formats
         //TODO:
     }
     public function playlistDownload($url): void{

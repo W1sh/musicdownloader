@@ -1,7 +1,7 @@
 <?php 
-include 'D:\GitHub\musicdownloader\vendor\athlon1600\youtube-downloader\src\YouTubeDownloader.php';
-$yt = new YouTubeDownloader();
+include 'vendor\madcodez\youtube-downloader\src\YTDownloader.php';
+$yt = new YTDownloader();
 
-$links = $yt->getDownloadLinks("https://www.youtube.com/watch?v=QxsmWxxouIM");
+$links = $yt->getDownloadLinks("https://www.youtube.com/watch?v=jGow4nmYkkA");
 
-var_dump($links);
+print_r($links);
