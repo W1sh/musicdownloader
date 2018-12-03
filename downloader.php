@@ -2,13 +2,14 @@
 include 'vendor\madcodez\youtube-downloader\src\YTDownloader.php';
 final class Downloader{
     private $yt;
+    protected static $instance = null;
     public static function Instance(){
-        static $inst = null;
-        if ($inst === null) {
+        if (!isset(static::$instance)) {
             $yt = new YTDownloader();
             $inst = new UserFactory();
+            static::$instance = new static;
         }
-        return $inst;
+        return static::$instance;
     }
     private function __construct(){
         //Private constructer so it can't be instatialized
