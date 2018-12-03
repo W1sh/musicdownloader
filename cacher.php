@@ -1,9 +1,11 @@
 <?php
+
 function store($key, $data){
+    $logger->info('Call to function store with $key->'.$key.' and $data->'.$data);
     // store information in file
     $json = read();
     $json[$key] = $data;
-    file_put_contents($file, json_encode($json));
+    file_put_contents($file, json_encode($json), FILE_APPEND|LOCK_EX);
 }
 
 function fetch($key){
