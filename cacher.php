@@ -1,31 +1,31 @@
 <?php
 function store($key, $data){
     // store information in file
-    $file = "config.json";
-    $json = json_decode(file_get_contents($file), true);
+    $json = read();
     $json[$key] = $data;
     file_put_contents($file, json_encode($json));
 }
 
 function fetch($key){
-    $file = "config.json";
-    $json = json_decode(file_get_contents($file), true);
-    return $json[$key];
     // retrieve information from file
+    $json = read();
+    print_r($json[$key]);
+    return $json[$key];
 }
 
-function initialize(){
-    // create file with default options if it doesn't exist
+function read(){
+    // read the configuration file
     $file = "config.json";
-    /*if(!is_file($file)){
-        $file=fopen("config.json", "w");*/
-        /*fwrite($file, "./downloads");*/
+    if(is_file($file)){
         $json = json_decode(file_get_contents($file), true);
-        //print_r($json);
-        print_r($json["directory"]);
-        print_r(sizeof($json["flags"]));
-        print_r($json["flags"]);
-    //}
+        return $json;
+    }else{
+        initialize(this());
+    }
 }
 
-initialize();
+function initialize($callback){
+    // create configuration file with default settings
+    file_put_contents("config.file", "{\"directory\":\"downloads\",\"flags\":[]}");
+    $callback();
+}
