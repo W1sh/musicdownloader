@@ -14,8 +14,8 @@ class Cacher {
     */
     function store($key, $data) {
         $file = "config.json";
-        $this->$logger->info('Call to function store with $key->'.$key.' and $data->'.$data);
-        $json = $this->read();
+        $this->$logger->info('Call to function store with $key->'."\"".$key."\"".' and $data->'."\"".$data."\"");
+        $json = $this->read(sprintf('store(%s, %s)', $key, $data));
         $json[$key] = $data;
         file_put_contents($file, json_encode($json));
     }
@@ -25,8 +25,8 @@ class Cacher {
     **  @return -> value corresponding to the key
     */
     function fetch($key) {
-        $this->$logger->info('Call to function retrieve with $key->'.$key);
-        $json = $this->read();
+        $this->$logger->info('Call to function retrieve with $key->'."\"".$key."\"");
+        $json = $this->read(sprintf('fetch(%s)', $key));
         print_r($json[$key]);
         return $json[$key];
     }
@@ -34,8 +34,9 @@ class Cacher {
     **  Function to read the information contained in the configuration file
     **  @return -> configuration file as json
     */
-    function read() {
-        $this->$logger->info('Call to function read');
+    function read($callback = false)
+    {
+        $this->$logger->info('Call to function read with $callback->' . "\"".($callback !== false ? $callback : "read")."\"");
         $file = "config.json";
         if (is_file($file)) {
             $this->$logger->info('File found.');
@@ -45,7 +46,7 @@ class Cacher {
         } else {
             $this->$logger->warning('File config.json doesn\'t exist.');
             $this->$logger->info('Running file initialization.');
-            $this->initialize('read');
+            $this->initialize(callback !== false ? $callback : "read()");
         }
     }
     /*
@@ -58,10 +59,9 @@ class Cacher {
         $this->$logger->info('Started configuration file with value "directory": "downloads"');
         $this->$logger->info('Started configuration file with value "flags": "[]"');
         file_put_contents("config.json", "{\"directory\":\"downloads\",\"flags\":[]}");
-        $this->$callback();
+        $this->$callback;
     }
 }
 $cacher = new Cacher();
-$cacher->read();
-$cacher->store("directory", "/meteaqui");
+$cacher->store("directory", "/oppa213");
 $cacher->read();

@@ -2,4 +2,4 @@ vendor/
 config.json
 composer.lock
 mdtester.php
-*.log
+php_errors.log
