@@ -1,5 +1,6 @@
 <?php
 include 'logger.php';
+
 class Cacher {
     private $logger;
     public function __construct(){
@@ -12,8 +13,9 @@ class Cacher {
     **  @return -> none
     */
     function store($key, $data) {
+        $file = "config.json";
         $this->$logger->info('Call to function store with $key->'.$key.' and $data->'.$data);
-        $json = read();
+        $json = $this->read();
         $json[$key] = $data;
         file_put_contents($file, json_encode($json));
     }
@@ -24,7 +26,7 @@ class Cacher {
     */
     function fetch($key) {
         $this->$logger->info('Call to function retrieve with $key->'.$key);
-        $json = read();
+        $json = $this->read();
         print_r($json[$key]);
         return $json[$key];
     }
@@ -38,6 +40,7 @@ class Cacher {
         if (is_file($file)) {
             $this->$logger->info('File found.');
             $json = json_decode(file_get_contents($file), true);
+            print_r($json);
             return $json;
         } else {
             $this->$logger->warning('File config.json doesn\'t exist.');
@@ -59,4 +62,6 @@ class Cacher {
     }
 }
 $cacher = new Cacher();
+$cacher->read();
+$cacher->store("directory", "/meteaqui");
 $cacher->read();

@@ -1,5 +1,5 @@
 vendor/
-*.json
+config.json
 composer.lock
 mdtester.php
 *.log
