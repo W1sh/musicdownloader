@@ -1,6 +1,7 @@
 <?php
 include 'downloader.php';
-$helpText = "help";
+$helpText = "Help \n -init <name>: creates a folder with the inserted name, if name is left empty, the folder name will be downloads; \n 
+-config <> \n";
 $howToUseText = "how to use";
 
 function parseArguments($arguments){
@@ -15,12 +16,14 @@ function parseArguments($arguments){
             }
             break;
         case "-help": 
+            global $helpText;
             echo $helpText;
             break;
         case "-config": 
             config();
             break;
         default: 
+            global $howToUseText;
             echo $howToUseText;
             break;
     }
@@ -35,8 +38,6 @@ function init($name){
     if (!mkdir($dir, 0777, true)) {
         throw new Exception ("Error: No can do");
     }else{
-        $file=fopen("conf.text", "w");
-        fwrite($file, $dir);
         echo "init my brodda on folder ".$name." and theres a new file";
     }
 }
