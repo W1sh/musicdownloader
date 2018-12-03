@@ -20,8 +20,12 @@ final class Downloader{
     public function findBestMatch($strng, $url){
         //TODO:
     }
-    public function singleDownload($url): void{
-        // ignore unknows formats
+    public function singleDownload($url, $type): void{
+        $this->$yt->getDownloadLinks($url);
+        
+        
+
+
         //TODO:
     }
     public function playlistDownload($url): void{
