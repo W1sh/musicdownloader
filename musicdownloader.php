@@ -35,7 +35,9 @@ function init($name){
     if (!mkdir($dir, 0777, true)) {
         throw new Exception ("Error: No can do");
     }else{
-        echo "init my brodda on folder ".$name;
+        $file=fopen("conf.text", "w");
+        fwrite($file, $dir);
+        echo "init my brodda on folder ".$name." and theres a new file";
     }
 }
 
