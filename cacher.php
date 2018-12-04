@@ -3,8 +3,11 @@ include 'logger.php';
 
 class Cacher {
     private $logger;
-    public function __construct(){
-        $this->$logger = new Logger("cacher");
+    private $file;
+    public function __construct($path = "config.json")
+    {   
+        $this->file = $path;
+        $this->logger = new Logger("cacher");
     }
     /*
     **  Function to store information in the configuration file
@@ -12,56 +15,63 @@ class Cacher {
     **  @param $data -> value to replace/store in the file 
     **  @return -> none
     */
-    function store($key, $data) {
-        $file = "config.json";
-        $this->$logger->info('Call to function store with $key->'."\"".$key."\"".' and $data->'."\"".$data."\"");
-        $json = $this->read(sprintf('store(%s, %s)', $key, $data));
-        $json[$key] = $data;
-        file_put_contents($file, json_encode($json));
+    public function store($key, $data) 
+    {
+        $this->logger->info('Call to function store with $key->'."\"".$key."\"".' and $data->'."\"".$data."\"");
+        if(($json = $this->read('store', array($key, $data))) !== false){
+            $json[$key] = $data;
+            file_put_contents($this->file, json_encode($json));
+        };
     }
     /*
     **  Function to retrieve information from the configuration file
     **  @param $key -> parameter to search in the file
     **  @return -> value corresponding to the key
     */
-    function fetch($key) {
-        $this->$logger->info('Call to function retrieve with $key->'."\"".$key."\"");
-        $json = $this->read(sprintf('fetch(%s)', $key));
-        print_r($json[$key]);
+    public function fetch($key) 
+    {
+        $this->logger->info('Call to function retrieve with $key->'."\"".$key."\"");
+        $json = $this->read('fetch', array($key));
         return $json[$key];
     }
     /*
     **  Function to read the information contained in the configuration file
     **  @return -> configuration file as json
     */
-    function read($callback = false)
-    {
-        $this->$logger->info('Call to function read with $callback->' . "\"".($callback !== false ? $callback : "read")."\"");
-        $file = "config.json";
-        if (is_file($file)) {
-            $this->$logger->info('File found.');
-            $json = json_decode(file_get_contents($file), true);
-            print_r($json);
+    public function read($methodName = false, $mParam = array())
+    {   
+        $this->logger->info('Call to function read with $callback->' . "\"".($callback !== false ? $callback : "read")."\"");
+        if (is_file($this->file)) {
+            $this->logger->info('File found.');
+            $json = json_decode(file_get_contents($this->file), true);
             return $json;
         } else {
-            $this->$logger->warning('File config.json doesn\'t exist.');
-            $this->$logger->info('Running file initialization.');
-            $this->initialize(callback !== false ? $callback : "read()");
+            $this->logger->warning('File config.json doesn\'t exist.');
+            $this->logger->info('Running file initialization.');
+            $this->initialize($methodName, $mParam);
+            return false;
         }
     }
     /*
     **  Function to create the configuration file with default settings
     **  @param? $callback -> (optional) callback to preceding function
+    **  @param? $callback -> (optional) callback to preceding function
     **  @return -> none
     */
-    function initialize($callback) {
-        $this->$logger->info('Created configuration file with name "config.json".');
-        $this->$logger->info('Started configuration file with value "directory": "downloads"');
-        $this->$logger->info('Started configuration file with value "flags": "[]"');
-        file_put_contents("config.json", "{\"directory\":\"downloads\",\"flags\":[]}");
-        $this->$callback;
+    public function initialize($methodName, $mParam) 
+    {
+        $this->logger->info('Created configuration file with name "config.json".');
+        $this->logger->info('Started configuration file with value "directory": "downloads"');
+        $this->logger->info('Started configuration file with value "flags": "[]"');
+        file_put_contents($this->file, 
+            sprintf("{\"directory\":\"%s\",\"flags\":[%s]}",
+            (sizeof($mParam) > 1 && ($mParam[0] == "directory")) === true ? $mParam[1] : "downloads",
+            (sizeof($mParam) > 1 && ($mParam[0] == "flags")) === true ? $mParam[1] : ""));
+        if($methodName === false){
+            $this->read();
+        }else{
+            $this->$methodName($mParam[0]);
+        }
     }
 }
 $cacher = new Cacher();
-$cacher->store("directory", "/oppa213");
-$cacher->read();
