@@ -1,72 +1,70 @@
-2018-12-04 12:32:08 INFO: (Music Downloader) Called the "-init" flag
-2018-12-04 12:32:08 INFO: (cacher) Call to function store with $key->"directory" and $data->"ananas"
-2018-12-04 12:32:08 INFO: (cacher) Call to function read with $callback->""
-2018-12-04 12:32:08 INFO: (cacher) File found.
-2018-12-04 12:32:24 INFO: (Music Downloader) Called the "-init" flag
-2018-12-04 12:32:24 INFO: (cacher) Call to function store with $key->"directory" and $data->"anana"
-2018-12-04 12:32:24 INFO: (cacher) Call to function read with $callback->""
-2018-12-04 12:32:24 INFO: (cacher) File found.
-2018-12-04 12:32:42 INFO: (Music Downloader) Called the "-init" flag
-2018-12-04 12:32:42 INFO: (cacher) Call to function store with $key->"directory" and $data->"download"
-2018-12-04 12:32:42 INFO: (cacher) Call to function read with $callback->""
-2018-12-04 12:32:42 INFO: (cacher) File found.
-2018-12-04 12:33:45 INFO: (Music Downloader) Called the "-init" flag
-2018-12-04 12:33:56 INFO: (Music Downloader) Called the "-init" flag
-2018-12-04 12:33:56 INFO: (cacher) Call to function store with $key->"directory" and $data->"download"
-2018-12-04 12:33:56 INFO: (cacher) Call to function read with $callback->""
-2018-12-04 12:33:56 INFO: (cacher) File found.
-2018-12-04 12:33:56 INFO: (Music Downloader) Successful init. The folder "download" was created
-2018-12-04 12:37:12 INFO: (Music Downloader) Called the "-config" flag
-2018-12-04 12:37:12 INFO: (cacher) Call to function store with $key->"flags" and $data->"-a"
-2018-12-04 12:37:12 INFO: (cacher) Call to function read with $callback->""
-2018-12-04 12:37:12 INFO: (cacher) File found.
-2018-12-04 12:37:12 INFO: (Music Downloader) Config argument "-flag"
-2018-12-04 12:37:26 INFO: (Music Downloader) Called the "-config" flag
-2018-12-04 12:37:26 INFO: (cacher) Call to function store with $key->"flags" and $data->"-b"
-2018-12-04 12:37:26 INFO: (cacher) Call to function read with $callback->""
-2018-12-04 12:37:26 INFO: (cacher) File found.
-2018-12-04 12:37:26 INFO: (Music Downloader) Config argument "-flag"
-2018-12-04 12:37:34 INFO: (Music Downloader) Called the "-config" flag
-2018-12-04 12:37:34 INFO: (cacher) Call to function store with $key->"flags" and $data->"-a"
-2018-12-04 12:37:34 INFO: (cacher) Call to function read with $callback->""
-2018-12-04 12:37:34 INFO: (cacher) File found.
-2018-12-04 12:37:34 INFO: (Music Downloader) Config argument "-flag"
-2018-12-04 12:37:36 INFO: (Music Downloader) Called the "-config" flag
-2018-12-04 12:37:36 INFO: (cacher) Call to function store with $key->"flags" and $data->"-b"
-2018-12-04 12:37:36 INFO: (cacher) Call to function read with $callback->""
-2018-12-04 12:37:36 INFO: (cacher) File found.
-2018-12-04 12:37:36 INFO: (Music Downloader) Config argument "-flag"
-2018-12-04 12:37:39 INFO: (Music Downloader) Called the "-config" flag
-2018-12-04 12:37:40 INFO: (cacher) Call to function store with $key->"flags" and $data->"-d"
-2018-12-04 12:37:40 INFO: (cacher) Call to function read with $callback->""
-2018-12-04 12:37:40 INFO: (cacher) File found.
-2018-12-04 12:37:40 INFO: (Music Downloader) Config argument "-flag"
-2018-12-04 12:49:07 INFO: (Music Downloader) Called the "-config" flag
-2018-12-04 12:49:07 INFO: (cacher) Call to function store with $key->"flags" and $data->"-d"
-2018-12-04 12:49:07 INFO: (cacher) Call to function read with $callback->""
-2018-12-04 12:49:07 INFO: (cacher) File found.
-2018-12-04 12:49:07 INFO: (Music Downloader) Config argument "-flag"
-2018-12-04 12:49:23 INFO: (Music Downloader) Called the "-config" flag
-2018-12-04 12:49:23 INFO: (cacher) Call to function store with $key->"flags" and $data->"-a"
-2018-12-04 12:49:23 INFO: (cacher) Call to function read with $callback->""
-2018-12-04 12:49:23 INFO: (cacher) File found.
-2018-12-04 12:49:23 INFO: (Music Downloader) Config argument "-flag"
-2018-12-04 12:50:02 INFO: (Music Downloader) Called the "-config" flag
-2018-12-04 12:50:02 INFO: (cacher) Call to function store with $key->"flags" and $data->"-a"
-2018-12-04 12:50:02 INFO: (cacher) Call to function read with $callback->""
-2018-12-04 12:50:02 INFO: (cacher) File found.
-2018-12-04 12:50:02 INFO: (Music Downloader) Config argument "-flag"
-2018-12-04 12:50:05 INFO: (Music Downloader) Called the "-config" flag
-2018-12-04 12:50:05 INFO: (Music Downloader) Config argument "-flag"
-2018-12-04 13:09:26 INFO: (Music Downloader) Called the "-config" flag
-2018-12-04 13:09:26 INFO: (Music Downloader) Config argument "-flag"
-2018-12-04 13:09:38 INFO: (Music Downloader) Called the "-config" flag
-2018-12-04 13:09:38 INFO: (Music Downloader) Config argument "-flag"
-2018-12-04 13:10:03 INFO: (Music Downloader) Called the "-config" flag
-2018-12-04 13:10:03 INFO: (Music Downloader) Config argument "-flag"
-2018-12-04 13:10:30 INFO: (Music Downloader) Called the "-config" flag
-2018-12-04 13:10:30 INFO: (Music Downloader) Config argument "-flag"
-2018-12-04 13:12:14 INFO: (Music Downloader) Called the "-config" flag
-2018-12-04 13:12:14 INFO: (Music Downloader) Config argument "-flag"
-2018-12-04 13:12:29 INFO: (Music Downloader) Called the "-config" flag
-2018-12-04 13:12:29 INFO: (Music Downloader) Config argument "-flag"
+2018-12-04 12:35:39 INFO: (cacher) Call to function store with $key->"directory" and $data->"allahu"
+2018-12-04 12:35:39 INFO: (cacher) Call to function read with $callback->""
+2018-12-04 12:35:39 INFO: (cacher) File found.
+2018-12-04 12:35:51 INFO: (cacher) Call to function store with $key->"directory" and $data->"123123"
+2018-12-04 12:35:51 INFO: (cacher) Call to function read with $callback->""
+2018-12-04 12:35:51 INFO: (cacher) File found.
+2018-12-04 12:37:02 INFO: (cacher) Call to function store with $key->"directory" and $data->"123123"
+2018-12-04 12:37:02 INFO: (cacher) Call to function read with $callback->""
+2018-12-04 12:37:02 INFO: (cacher) File found.
+2018-12-04 12:37:05 INFO: (cacher) Call to function store with $key->"a" and $data->"123123"
+2018-12-04 12:37:05 INFO: (cacher) Call to function read with $callback->""
+2018-12-04 12:37:05 INFO: (cacher) File found.
+2018-12-04 12:38:42 INFO: (cacher) Call to function store with $key->"a" and $data->"123123"
+2018-12-04 12:38:42 INFO: (cacher) Call to function read with $callback->""
+2018-12-04 12:38:42 INFO: (cacher) File found.
+2018-12-04 12:38:42 ALERT: (cacher) Failed to identify $key->"a"
+2018-12-04 12:39:40 INFO: (cacher) Call to function store with $key->"a" and $data->"123123"
+2018-12-04 12:39:40 INFO: (cacher) Call to function read with $callback->""
+2018-12-04 12:39:40 INFO: (cacher) File found.
+2018-12-04 12:39:40 ALERT: (cacher) Failed to identify $key->"a"
+2018-12-04 12:40:21 INFO: (cacher) Call to function store with $key->"a" and $data->"123123"
+2018-12-04 12:40:21 INFO: (cacher) Call to function read with $callback->""
+2018-12-04 12:40:21 INFO: (cacher) File found.
+2018-12-04 12:40:31 INFO: (cacher) Call to function store with $key->"a" and $data->"123123"
+2018-12-04 12:40:31 INFO: (cacher) Call to function read with $callback->""
+2018-12-04 12:40:31 INFO: (cacher) File found.
+2018-12-04 12:40:31 ERROR: (cacher) Failed to identify $key->"a" EXCEPTION: 
+2018-12-04 12:40:47 INFO: (cacher) Call to function store with $key->"a" and $data->"123123"
+2018-12-04 12:40:47 INFO: (cacher) Call to function read with $callback->""
+2018-12-04 12:40:47 INFO: (cacher) File found.
+2018-12-04 12:40:47 ALERT: (cacher) Failed to identify $key->"a"
+2018-12-04 12:47:31 INFO: (Cacher) Call to function store with $key->"a" and $data->"123123".
+2018-12-04 12:47:31 INFO: (Cacher) Call to function read with $mName->"store" and $mParam->"store".
+2018-12-04 12:47:31 WARNING: (Cacher) File config.json doesn't exist.
+2018-12-04 12:47:31 INFO: (Cacher) Running file initialization.
+2018-12-04 12:47:31 INFO: (Cacher) Created configuration file with name "config.json".
+2018-12-04 12:47:31 INFO: (Cacher) Started configuration file with value "directory": "downloads".
+2018-12-04 12:47:31 INFO: (Cacher) Started configuration file with value "flags": "[]".
+2018-12-04 12:49:23 INFO: (Cacher) Call to function store with $key->"a" and $data->"123123".
+2018-12-04 12:49:23 INFO: (Cacher) Call to function read with $mName->"store" and $mParam->"store".
+2018-12-04 12:49:23 WARNING: (Cacher) File config.json doesn't exist.
+2018-12-04 12:49:23 INFO: (Cacher) Running file initialization.
+2018-12-04 12:49:23 INFO: (Cacher) Created configuration file with name "config.json".
+2018-12-04 12:49:23 INFO: (Cacher) Started configuration file with value "directory": "downloads".
+2018-12-04 12:49:23 INFO: (Cacher) Started configuration file with value "flags": "[]".
+2018-12-04 12:49:40 INFO: (Cacher) Call to function store with $key->"a" and $data->"123123".
+2018-12-04 12:49:40 INFO: (Cacher) Call to function read with $mName->"store" and $mParam->"store".
+2018-12-04 12:49:40 WARNING: (Cacher) File config.json doesn't exist.
+2018-12-04 12:49:40 INFO: (Cacher) Running file initialization.
+2018-12-04 12:49:40 INFO: (Cacher) Created configuration file with name "config.json".
+2018-12-04 12:49:40 INFO: (Cacher) Started configuration file with value "directory": "downloads".
+2018-12-04 12:49:40 INFO: (Cacher) Started configuration file with value "flags": "[]".
+2018-12-04 12:50:45 INFO: (Cacher) Call to function store with $key->"a" and $data->"123123".
+2018-12-04 12:50:45 INFO: (Cacher) Call to function read with $mName->"store" and $mParam->"store".
+2018-12-04 12:50:45 WARNING: (Cacher) File config.json doesn't exist.
+2018-12-04 12:50:45 INFO: (Cacher) Running file initialization.
+2018-12-04 12:50:45 INFO: (Cacher) Created configuration file with name "config.json".
+2018-12-04 12:50:45 INFO: (Cacher) Started configuration file with value "directory": "downloads".
+2018-12-04 12:50:45 INFO: (Cacher) Started configuration file with value "flags": "[]".
+2018-12-04 12:51:11 INFO: (Cacher) Call to function store with $key->"a" and $data->"123123".
+2018-12-04 12:51:11 INFO: (Cacher) Call to function read with $mName->"store" and $mParam->"store".
+2018-12-04 12:51:11 WARNING: (Cacher) File config.json doesn't exist.
+2018-12-04 12:51:11 INFO: (Cacher) Running file initialization.
+2018-12-04 12:51:11 INFO: (Cacher) Created configuration file with name "config.json".
+2018-12-04 12:51:11 INFO: (Cacher) Started configuration file with value "directory": "downloads".
+2018-12-04 12:51:11 INFO: (Cacher) Started configuration file with value "flags": "[]".
+2018-12-04 12:54:04 INFO: (Cacher) Call to function store with $key->"a" and $data->"123123".
+2018-12-04 12:54:04 INFO: (Cacher) Call to function read with $mName->"store" and $mParam->"store".
+2018-12-04 12:54:04 INFO: (Cacher) File found.
+2018-12-04 12:54:04 ALERT: (Cacher) Failed to identify $key->"a".

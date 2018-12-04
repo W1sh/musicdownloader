@@ -4,35 +4,51 @@ include_once 'logger.php';
 class Cacher {
     private $logger;
     private $file;
+    /*
+    **  Constructor
+    **  @param $path -> path to the configuration file
+    */
     public function __construct($path = "config.json")
     {   
         $this->file = $path;
-        $this->logger = new Logger("cacher");
+        $this->logger = new Logger("Cacher");
     }
     /*
     **  Function to store information in the configuration file
     **  @param $key -> parameter to search in the file
-    **  @param $data -> value to replace/store in the file 
+    **  @param $data -> value to replace/store in the file
+    **  @throws Exception -> If the key does not exist in the configuration file
     **  @return -> none
     */
     public function store($key, $data) 
     {
-        $this->logger->info('Call to function store with $key->'."\"".$key."\"".' and $data->'."\"".$data."\"");
+        $this->logger->info('Call to function store with $key->'.'"'.$key.'"'.' and $data->'.'"'.$data.'".');
         if(($json = $this->read('store', array($key, $data))) !== false){
-            $json[$key] = $data;
-            file_put_contents($this->file, json_encode($json));
+            if(isset($json[$key])){
+                $json[$key] = $data;
+                file_put_contents($this->file, json_encode($json));
+            }else{
+                $this->logger->alert('Failed to identify $key->'.'"'.$key.'".');
+                throw new Exception("Non-existant key in configuration file.");
+            }
         };
     }
     /*
     **  Function to retrieve information from the configuration file
     **  @param $key -> parameter to search in the file
+    **  @throws Exception -> If the key does not exist in the configuration file
     **  @return -> value corresponding to the key
     */
     public function fetch($key) 
     {
-        $this->logger->info('Call to function retrieve with $key->'."\"".$key."\"");
+        $this->logger->info('Call to function retrieve with $key->'.'"'.$key.'".');
         $json = $this->read('fetch', array($key));
-        return $json[$key];
+        if(isset($json[$key])){
+            return $json[$key];
+        }else{
+            $this->logger->alert('Failed to retrieve $key->'.'"'.$key.'".');
+            throw new Exception("Non-existant key in configuration file.");
+        }
     }
     /*
     **  Function to read the information contained in the configuration file
@@ -42,7 +58,7 @@ class Cacher {
     */
     public function read($mName = false, $mParam = array())
     {   
-        $this->logger->info('Call to function read with $callback->' . "\"".($callback !== false ? $callback : "read")."\"");
+        $this->logger->info('Call to function read with $mName->'.'"'.$mName.'"'.' and $mParam->'.'"'.$mName.'".');
         if (is_file($this->file)) {
             $this->logger->info('File found.');
             $json = json_decode(file_get_contents($this->file), true);
@@ -63,16 +79,21 @@ class Cacher {
     public function initialize($mName, $mParam) 
     {
         $this->logger->info('Created configuration file with name "config.json".');
-        $this->logger->info('Started configuration file with value "directory": "downloads"');
-        $this->logger->info('Started configuration file with value "flags": "[]"');
+        $this->logger->info('Started configuration file with value "directory": "downloads".');
+        $this->logger->info('Started configuration file with value "flags": "[]".');
         file_put_contents($this->file, 
             sprintf("{\"directory\":\"%s\",\"flags\":[%s]}",
             (sizeof($mParam) > 1 && ($mParam[0] == "directory")) === true ? $mParam[1] : "downloads",
             (sizeof($mParam) > 1 && ($mParam[0] == "flags")) === true ? $mParam[1] : ""));
-        if($mName === false){
-            $this->read();
-        }else{
-            $this->$mName($mParam[0]);
+        switch($mName){
+            case false: 
+                $this->read();
+                break;
+            case "fetch": 
+                $this->fetch($mParam[0]);
+                break;
         }
     }
 }
+$cacher = new Cacher();
+$cacher->store("a", "123123");
