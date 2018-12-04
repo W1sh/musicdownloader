@@ -4,6 +4,10 @@ include 'logger.php';
 class Cacher {
     private $logger;
     private $file;
+    /*
+    **  Constructor
+    **  @param $path -> path to the configuration file
+    */
     public function __construct($path = "config.json")
     {   
         $this->file = $path;
