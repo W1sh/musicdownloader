@@ -1,0 +1,21 @@
+Flags para download
+                -v
+                -a
+                -av
+                -mp4
+                -3gp
+                -webm
+                -m4a
+        Flags do Futuro
+                -resoluçao
+
+Flags para -config
+        -dir: mudar o diretorio
+        -clear: elimina a pasta do diretorio ou limpa a pasta
+        -flag <-nomeflagparadownload>: torna a flag como default flag
+        
+TODO:
+        Como procurar vídeos no youtube
+        O video pretendido tem de conter as palavaras todas da procura e o maior numero de visualizações ou gostos
+        Procurar e obter o url pretendido
+        Fazer o -config
