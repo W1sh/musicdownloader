@@ -84,16 +84,22 @@ function config($arguments, $dLogger){
         }
         $dLogger->info("Config argument \"".$arguments[2]."\"");
 }
-
-function init($name,$dLogger){
-    
+/*
+    **  Function to create a folder to hold the downloads
+    **  @param $name -> name of the folder
+    **  @param $dLogger -> instance of logger
+    **  @throws Exception -> If the folder couldn't be created
+    **  @return -> none
+    */
+function init($name, $dLogger){
     $dir=$name;
     if (!mkdir($dir, 0777, true)) {
+        $dLogger->alert('Failed to create directory with $name: '.'"'.$name.'".');
         throw new Exception ("Error: No can do");
     }else{
         $cacher=new Cacher();
         $cacher->store("directory", sprintf("%s", $dir));
-        $dLogger->info("Successful init. The folder \"".$name."\" was created");
+        $dLogger->info('Successful init. The folder '.'"'.$name.'"'.' was created.');
     }
 }
 
