@@ -1,5 +1,5 @@
 <?php
-include 'logger.php';
+include_once 'logger.php';
 
 class Cacher {
     private $logger;

@@ -24,8 +24,6 @@ final class Downloader{
         $this->$yt->getDownloadLinks($url);
         
         
-
-
         //TODO:
     }
     public function playlistDownload($url): void{
