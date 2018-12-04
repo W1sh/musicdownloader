@@ -640,3 +640,51 @@
 )
 ".
 2018-12-04 16:29:28 INFO: (Music Downloader) Music downloader argument ""
+2018-12-04 18:49:24 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+    [2] => -a
+)
+".
+2018-12-04 18:49:39 INFO: (Music Downloader) Music downloader argument ""
+2018-12-04 18:51:43 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+    [2] => -v
+)
+".
+2018-12-04 18:51:45 INFO: (Music Downloader) Music downloader argument ""
+2018-12-04 18:52:36 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+    [2] => -m4a
+)
+".
+2018-12-04 18:52:38 INFO: (Music Downloader) Music downloader argument ""
+2018-12-04 18:53:08 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+    [2] => -3gp
+)
+".
+2018-12-04 18:53:10 INFO: (Music Downloader) Music downloader argument ""
+2018-12-04 18:54:05 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+    [2] => -av
+)
+".
+2018-12-04 18:54:07 INFO: (Music Downloader) Music downloader argument ""
+2018-12-04 18:54:21 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+    [2] => -mp4
+)
+".
+2018-12-04 18:54:23 INFO: (Music Downloader) Music downloader argument ""

@@ -36,12 +36,49 @@ final class Downloader{
                 $merged = array_merge($possibleDls, $filteredArray);
                 print_r($merged);
                 break;
-            case "-a": break;
-            case "-av": break;
-            case "-mp4": break;
-            case "-3gp": break;
-            case "-webm": break;
-            case "-m4a":break;
+            case "-a": 
+                $filteredArray = array_filter($dls, function($item){
+                    return strpos($item["type"], "Audio Only") !== false;
+                });
+                $merged = array_merge($possibleDls, $filteredArray);
+                print_r($merged);
+            break;
+            case "-av": 
+                $filteredArray = array_filter($dls, function($item){
+                    return strpos($item["type"], "Audio Only") === false 
+                    && strpos($item["type"], "Video Only") === false;
+                });
+                $merged = array_merge($possibleDls, $filteredArray);
+                print_r($merged); 
+            break;
+            case "-mp4": 
+                $filteredArray = array_filter($dls, function($item){
+                    return strpos($item["type"], "MP4") !== false;
+                });
+                $merged = array_merge($possibleDls, $filteredArray);
+                print_r($merged); 
+            break;
+            case "-3gp": 
+                $filteredArray = array_filter($dls, function($item){
+                    return strpos($item["type"], "3GP") !== false;
+                });
+                $merged = array_merge($possibleDls, $filteredArray);
+                print_r($merged);
+             break;
+            case "-webm": 
+                $filteredArray = array_filter($dls, function($item){
+                    return strpos($item["type"], "WEBM") !== false;
+                });
+                $merged = array_merge($possibleDls, $filteredArray);
+                print_r($merged); 
+            break;
+            case "-m4a": 
+                $filteredArray = array_filter($dls, function($item){
+                    return strpos($item["type"], "M4A") !== false;
+                });
+                $merged = array_merge($possibleDls, $filteredArray);
+                print_r($merged);
+            break;
         }
         echo $flags;
         //TODO:
