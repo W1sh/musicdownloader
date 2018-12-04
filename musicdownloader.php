@@ -104,12 +104,10 @@ function download($arguments, $dLogger){
     }else{
         if(sizeof($arguments)>2){
             $flags = array_splice($arguments, 2);
-            print_r($flags);
         }else{
             $cacher=new Cacher();
             $flags = $cacher->fetch("flags");
         }
-        echo "ALLU".PHP_EOL;
         Downloader::singleDownload($arguments[1], $flags);
     }
     $dLogger->info("Music downloader argument \"".$arguments[2]."\"");

@@ -1,6 +1,7 @@
 <?php
-include_once 'vendor\madcodez\youtube-downloader\src\YTDownloader.php';
+include_once './vendor/madcodez/youtube-downloader/src/YTDownloader.php';
 final class Downloader{
+    const FIREFOX = "Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:54.0) Gecko/20100101 Firefox/54.0";
     private function __construct(){
         //Private constructer so it can't be instatialized
     }
@@ -11,6 +12,8 @@ final class Downloader{
         //TODO:
     }
     public static function singleDownload($url, $flags): void{
+        $dLogger = new Logger("Downloader");
+        $dLogger->info('Call to method singleDownloader with parameters $url->'.'"'.$url.'" and $flags->'.'"'.$url.'"');
         $youtube = new YTDownloader();
         $results = $youtube->getDownloadLinks($url);
         $info = $results["info"];
@@ -27,21 +30,19 @@ final class Downloader{
         print_r($links);*/
         $possibleDls = array();
         
+        $dLogger->info('Started filtering results based on received $flags parameter');
         switch($flags[0]){
             case "-v": 
-                echo "TOU CA";
                 $filteredArray = array_filter($dls, function($item){
                     return strpos($item["type"], "Video Only") !== false;
                 });
                 $merged = array_merge($possibleDls, $filteredArray);
-                print_r($merged);
                 break;
             case "-a": 
                 $filteredArray = array_filter($dls, function($item){
                     return strpos($item["type"], "Audio Only") !== false;
                 });
                 $merged = array_merge($possibleDls, $filteredArray);
-                print_r($merged);
             break;
             case "-av": 
                 $filteredArray = array_filter($dls, function($item){
@@ -49,41 +50,46 @@ final class Downloader{
                     && strpos($item["type"], "Video Only") === false;
                 });
                 $merged = array_merge($possibleDls, $filteredArray);
-                print_r($merged); 
             break;
             case "-mp4": 
                 $filteredArray = array_filter($dls, function($item){
                     return strpos($item["type"], "MP4") !== false;
                 });
                 $merged = array_merge($possibleDls, $filteredArray);
-                print_r($merged); 
             break;
             case "-3gp": 
                 $filteredArray = array_filter($dls, function($item){
                     return strpos($item["type"], "3GP") !== false;
                 });
                 $merged = array_merge($possibleDls, $filteredArray);
-                print_r($merged);
-             break;
+            break;
             case "-webm": 
                 $filteredArray = array_filter($dls, function($item){
                     return strpos($item["type"], "WEBM") !== false;
                 });
                 $merged = array_merge($possibleDls, $filteredArray);
-                print_r($merged); 
             break;
             case "-m4a": 
                 $filteredArray = array_filter($dls, function($item){
                     return strpos($item["type"], "M4A") !== false;
                 });
                 $merged = array_merge($possibleDls, $filteredArray);
-                print_r($merged);
             break;
         }
-        echo $flags;
-        //TODO:
+        $bytes = static::consumeURL($merged[0]["url"]);
+        echo strlen($bytes);
     }
     public static function playlistDownload($url): void{
         //TODO:
+    }
+    private static function consumeURL($url){
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_USERAGENT, static::FIREFOX);
+
+        return curl_exec($ch);
     }
 }
