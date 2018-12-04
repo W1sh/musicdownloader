@@ -22,7 +22,7 @@ class Cacher {
     */
     public function store($key, $data) 
     {
-        $this->logger->info('Call to function store with $key->'.'"'.$key.'"'.' and $data->'.'"'.$data.'".');
+        $this->logger->info('Call to method store with parameters: $key->'.'"'.$key.'"'.' and $data->'.'"'.$data.'".');
         if(($json = $this->read('store', array($key, $data))) !== false){
             if(isset($json[$key])){
                 $json[$key] = $data;
@@ -41,7 +41,7 @@ class Cacher {
     */
     public function fetch($key) 
     {
-        $this->logger->info('Call to function retrieve with $key->'.'"'.$key.'".');
+        $this->logger->info('Call to method fetch with parameters: $key->'.'"'.$key.'".');
         $json = $this->read('fetch', array($key));
         if(isset($json[$key])){
             return $json[$key];
@@ -58,7 +58,7 @@ class Cacher {
     */
     public function read($mName = false, $mParam = array())
     {   
-        $this->logger->info('Call to function read with $mName->'.'"'.$mName.'"'.' and $mParam->'.'"'.$mName.'".');
+        $this->logger->info('Call to method read with parameters: $mName->'.'"'.$mName.'"'.' and $mParam->'.'"'.print_r($mParam, true).'".');
         if (is_file($this->file)) {
             $this->logger->info('File found.');
             $json = json_decode(file_get_contents($this->file), true);
@@ -77,7 +77,8 @@ class Cacher {
     **  @return -> none
     */
     public function initialize($mName, $mParam) 
-    {
+    {   
+        $this->logger->info('Call to method read with parameters: $mName->'.'"'.$mName.'"'.' and $mParam->'.'"'.print_r($mParam, true).'".');
         $this->logger->info('Created configuration file with name "config.json".');
         $this->logger->info('Started configuration file with value "directory": "downloads".');
         $this->logger->info('Started configuration file with value "flags": "[]".');
@@ -95,5 +96,3 @@ class Cacher {
         }
     }
 }
-$cacher = new Cacher();
-$cacher->store("a", "123123");

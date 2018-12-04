@@ -48,7 +48,7 @@ function config($mArg, $dLogger){
                     $cacher->store("flags",$mArg[3]);
                     break;
                 default:
-                    echo("Invalid flag \n \t".
+                    echo("Invalid flag, you can use the following ones:\n\t".
                      "-v: Video only; \n\t".
                      "-a: Audio only; \n\t".
                      "-av: Audio and Video; \n\t".
@@ -96,33 +96,23 @@ function init($name, $dLogger){
 }
 
 function download($arguments, $dLogger){
-    $cacher=new Cacher();
-    //Method to give flags to the config.json and search the url for the requested video/song
-    switch ($arguments[3]){
-        case "-a":
-        break;
-
-        case "-v":
-        break;
-
-        case "-m4a":
-        break;
-
-        case "-mp4":
-        break;
-
-        case "-3gp":
-        break;
-
-        case "-webm":
-        break;
-
-        default:
-        //audio and video
-
-        break;
+    $dLogger->info('Call to method download with parameters $arguments: '.'"'.print_r($arguments, true).'".');
+    $pos = strpos($arguments[1], "https://www.youtube.com/watch");
+    if($pos === false){
+        $dLogger->alert('Invalid $url: '.'"'.$arguments[1].'".');
+        throw new Exception ("Invalid url received");
+    }else{
+        if(sizeof($arguments)>2){
+            $flags = array_splice($arguments, 2);
+            print_r($flags);
+        }else{
+            $cacher=new Cacher();
+            $flags = $cacher->fetch("flags");
+        }
+        echo "ALLU".PHP_EOL;
+        Downloader::singleDownload($arguments[1], $flags);
     }
-    $dLogger->info("Music downloder argument ".$arguments[2]);
+    $dLogger->info("Music downloader argument \"".$arguments[2]."\"");
 }
 
 echo parseArguments($argv).PHP_EOL;

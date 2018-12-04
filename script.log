@@ -68,3 +68,575 @@
 2018-12-04 12:54:04 INFO: (Cacher) Call to function read with $mName->"store" and $mParam->"store".
 2018-12-04 12:54:04 INFO: (Cacher) File found.
 2018-12-04 12:54:04 ALERT: (Cacher) Failed to identify $key->"a".
+2018-12-04 15:25:48 INFO: (Cacher) Call to method store with parameters: $key->"a" and $data->"123123".
+2018-12-04 15:25:48 INFO: (Cacher) Call to method read with parameters: $mName->"store" and $mParam->"Array
+(
+    [0] => a
+    [1] => 123123
+)
+".
+2018-12-04 15:25:48 INFO: (Cacher) File found.
+2018-12-04 15:25:48 ALERT: (Cacher) Failed to identify $key->"a".
+2018-12-04 15:26:36 ALERT: (Music Downloader) Call to method download with parameters $arguments: "".
+2018-12-04 15:26:36 INFO: (Music Downloader) Music downloder argument 
+2018-12-04 15:27:19 ALERT: (Music Downloader) Call to method download with parameters $arguments: "".
+2018-12-04 15:27:19 INFO: (Music Downloader) Music downloader argument 
+2018-12-04 15:28:24 ALERT: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+)
+".
+2018-12-04 15:28:24 INFO: (Music Downloader) Music downloader argument 
+2018-12-04 15:29:05 ALERT: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.yoube.com/watch?v=n8aH4jtGhCw
+)
+".
+2018-12-04 15:29:05 ALERT: (Music Downloader) Invalid $url: "".
+2018-12-04 15:38:36 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.yoube.com/watch?v=n8aH4jtGhCw
+)
+".
+2018-12-04 15:38:36 ALERT: (Music Downloader) Invalid $url: "https://www.yoube.com/watch?v=n8aH4jtGhCw".
+2018-12-04 15:38:43 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+)
+".
+2018-12-04 15:38:43 INFO: (Music Downloader) Music downloader argument ""
+2018-12-04 15:39:11 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+)
+".
+2018-12-04 15:39:12 INFO: (Cacher) Call to method fetch with parameters: $key->"flags".
+2018-12-04 15:39:12 INFO: (Cacher) Call to method read with parameters: $mName->"fetch" and $mParam->"Array
+(
+    [0] => flags
+)
+".
+2018-12-04 15:39:12 INFO: (Cacher) File found.
+2018-12-04 15:39:12 INFO: (Music Downloader) Music downloader argument ""
+2018-12-04 15:40:07 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+    [2] => -v
+)
+".
+2018-12-04 15:40:08 INFO: (Music Downloader) Music downloader argument ""
+2018-12-04 15:40:25 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+    [2] => -v
+)
+".
+2018-12-04 15:40:25 INFO: (Music Downloader) Music downloader argument ""
+2018-12-04 15:40:34 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+    [2] => -v
+)
+".
+2018-12-04 15:40:34 INFO: (Music Downloader) Music downloader argument ""
+2018-12-04 15:41:06 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+    [2] => -v
+)
+".
+2018-12-04 15:41:06 INFO: (Music Downloader) Music downloader argument ""
+2018-12-04 15:41:12 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+    [2] => -v
+    [3] => -a
+    [4] => -mp4
+)
+".
+2018-12-04 15:41:12 INFO: (Music Downloader) Music downloader argument ""
+2018-12-04 15:44:54 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+)
+".
+2018-12-04 15:44:54 INFO: (Cacher) Call to method fetch with parameters: $key->"flags".
+2018-12-04 15:44:54 INFO: (Cacher) Call to method read with parameters: $mName->"fetch" and $mParam->"Array
+(
+    [0] => flags
+)
+".
+2018-12-04 15:44:54 INFO: (Cacher) File found.
+2018-12-04 15:46:14 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+)
+".
+2018-12-04 15:46:14 INFO: (Cacher) Call to method fetch with parameters: $key->"flags".
+2018-12-04 15:46:14 INFO: (Cacher) Call to method read with parameters: $mName->"fetch" and $mParam->"Array
+(
+    [0] => flags
+)
+".
+2018-12-04 15:46:14 INFO: (Cacher) File found.
+2018-12-04 15:46:28 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+)
+".
+2018-12-04 15:46:28 INFO: (Cacher) Call to method fetch with parameters: $key->"flags".
+2018-12-04 15:46:28 INFO: (Cacher) Call to method read with parameters: $mName->"fetch" and $mParam->"Array
+(
+    [0] => flags
+)
+".
+2018-12-04 15:46:28 INFO: (Cacher) File found.
+2018-12-04 15:48:53 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+)
+".
+2018-12-04 15:48:53 INFO: (Cacher) Call to method fetch with parameters: $key->"flags".
+2018-12-04 15:48:53 INFO: (Cacher) Call to method read with parameters: $mName->"fetch" and $mParam->"Array
+(
+    [0] => flags
+)
+".
+2018-12-04 15:48:53 INFO: (Cacher) File found.
+2018-12-04 15:49:12 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+)
+".
+2018-12-04 15:49:12 INFO: (Cacher) Call to method fetch with parameters: $key->"flags".
+2018-12-04 15:49:12 INFO: (Cacher) Call to method read with parameters: $mName->"fetch" and $mParam->"Array
+(
+    [0] => flags
+)
+".
+2018-12-04 15:49:12 INFO: (Cacher) File found.
+2018-12-04 15:49:35 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+)
+".
+2018-12-04 15:49:35 INFO: (Cacher) Call to method fetch with parameters: $key->"flags".
+2018-12-04 15:49:35 INFO: (Cacher) Call to method read with parameters: $mName->"fetch" and $mParam->"Array
+(
+    [0] => flags
+)
+".
+2018-12-04 15:49:35 INFO: (Cacher) File found.
+2018-12-04 15:53:26 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+)
+".
+2018-12-04 15:53:26 INFO: (Cacher) Call to method fetch with parameters: $key->"flags".
+2018-12-04 15:53:26 INFO: (Cacher) Call to method read with parameters: $mName->"fetch" and $mParam->"Array
+(
+    [0] => flags
+)
+".
+2018-12-04 15:53:26 INFO: (Cacher) File found.
+2018-12-04 15:53:35 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+)
+".
+2018-12-04 15:53:35 INFO: (Cacher) Call to method fetch with parameters: $key->"flags".
+2018-12-04 15:53:35 INFO: (Cacher) Call to method read with parameters: $mName->"fetch" and $mParam->"Array
+(
+    [0] => flags
+)
+".
+2018-12-04 15:53:35 INFO: (Cacher) File found.
+2018-12-04 15:54:12 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+)
+".
+2018-12-04 15:54:12 INFO: (Cacher) Call to method fetch with parameters: $key->"flags".
+2018-12-04 15:54:12 INFO: (Cacher) Call to method read with parameters: $mName->"fetch" and $mParam->"Array
+(
+    [0] => flags
+)
+".
+2018-12-04 15:54:12 INFO: (Cacher) File found.
+2018-12-04 15:56:35 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+)
+".
+2018-12-04 15:56:35 INFO: (Cacher) Call to method fetch with parameters: $key->"flags".
+2018-12-04 15:56:35 INFO: (Cacher) Call to method read with parameters: $mName->"fetch" and $mParam->"Array
+(
+    [0] => flags
+)
+".
+2018-12-04 15:56:35 INFO: (Cacher) File found.
+2018-12-04 15:56:55 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+)
+".
+2018-12-04 15:56:55 INFO: (Cacher) Call to method fetch with parameters: $key->"flags".
+2018-12-04 15:56:55 INFO: (Cacher) Call to method read with parameters: $mName->"fetch" and $mParam->"Array
+(
+    [0] => flags
+)
+".
+2018-12-04 15:56:55 INFO: (Cacher) File found.
+2018-12-04 15:57:21 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+)
+".
+2018-12-04 15:57:21 INFO: (Cacher) Call to method fetch with parameters: $key->"flags".
+2018-12-04 15:57:21 INFO: (Cacher) Call to method read with parameters: $mName->"fetch" and $mParam->"Array
+(
+    [0] => flags
+)
+".
+2018-12-04 15:57:21 INFO: (Cacher) File found.
+2018-12-04 15:57:33 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+)
+".
+2018-12-04 15:57:33 INFO: (Cacher) Call to method fetch with parameters: $key->"flags".
+2018-12-04 15:57:33 INFO: (Cacher) Call to method read with parameters: $mName->"fetch" and $mParam->"Array
+(
+    [0] => flags
+)
+".
+2018-12-04 15:57:33 INFO: (Cacher) File found.
+2018-12-04 15:58:14 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+)
+".
+2018-12-04 15:58:14 INFO: (Cacher) Call to method fetch with parameters: $key->"flags".
+2018-12-04 15:58:14 INFO: (Cacher) Call to method read with parameters: $mName->"fetch" and $mParam->"Array
+(
+    [0] => flags
+)
+".
+2018-12-04 15:58:14 INFO: (Cacher) File found.
+2018-12-04 15:58:24 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+)
+".
+2018-12-04 15:58:24 INFO: (Cacher) Call to method fetch with parameters: $key->"flags".
+2018-12-04 15:58:24 INFO: (Cacher) Call to method read with parameters: $mName->"fetch" and $mParam->"Array
+(
+    [0] => flags
+)
+".
+2018-12-04 15:58:24 INFO: (Cacher) File found.
+2018-12-04 16:00:59 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+)
+".
+2018-12-04 16:00:59 INFO: (Cacher) Call to method fetch with parameters: $key->"flags".
+2018-12-04 16:00:59 INFO: (Cacher) Call to method read with parameters: $mName->"fetch" and $mParam->"Array
+(
+    [0] => flags
+)
+".
+2018-12-04 16:00:59 INFO: (Cacher) File found.
+2018-12-04 16:01:15 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+)
+".
+2018-12-04 16:01:15 INFO: (Cacher) Call to method fetch with parameters: $key->"flags".
+2018-12-04 16:01:15 INFO: (Cacher) Call to method read with parameters: $mName->"fetch" and $mParam->"Array
+(
+    [0] => flags
+)
+".
+2018-12-04 16:01:15 INFO: (Cacher) File found.
+2018-12-04 16:01:35 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+)
+".
+2018-12-04 16:01:35 INFO: (Cacher) Call to method fetch with parameters: $key->"flags".
+2018-12-04 16:01:35 INFO: (Cacher) Call to method read with parameters: $mName->"fetch" and $mParam->"Array
+(
+    [0] => flags
+)
+".
+2018-12-04 16:01:35 INFO: (Cacher) File found.
+2018-12-04 16:02:02 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+)
+".
+2018-12-04 16:02:02 INFO: (Cacher) Call to method fetch with parameters: $key->"flags".
+2018-12-04 16:02:02 INFO: (Cacher) Call to method read with parameters: $mName->"fetch" and $mParam->"Array
+(
+    [0] => flags
+)
+".
+2018-12-04 16:02:02 INFO: (Cacher) File found.
+2018-12-04 16:02:42 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+)
+".
+2018-12-04 16:02:42 INFO: (Cacher) Call to method fetch with parameters: $key->"flags".
+2018-12-04 16:02:42 INFO: (Cacher) Call to method read with parameters: $mName->"fetch" and $mParam->"Array
+(
+    [0] => flags
+)
+".
+2018-12-04 16:02:42 INFO: (Cacher) File found.
+2018-12-04 16:02:44 INFO: (Music Downloader) Music downloader argument ""
+2018-12-04 16:02:59 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+)
+".
+2018-12-04 16:02:59 INFO: (Cacher) Call to method fetch with parameters: $key->"flags".
+2018-12-04 16:03:00 INFO: (Cacher) Call to method read with parameters: $mName->"fetch" and $mParam->"Array
+(
+    [0] => flags
+)
+".
+2018-12-04 16:03:00 INFO: (Cacher) File found.
+2018-12-04 16:03:01 INFO: (Music Downloader) Music downloader argument ""
+2018-12-04 16:03:13 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+)
+".
+2018-12-04 16:03:13 INFO: (Cacher) Call to method fetch with parameters: $key->"flags".
+2018-12-04 16:03:13 INFO: (Cacher) Call to method read with parameters: $mName->"fetch" and $mParam->"Array
+(
+    [0] => flags
+)
+".
+2018-12-04 16:03:13 INFO: (Cacher) File found.
+2018-12-04 16:03:15 INFO: (Music Downloader) Music downloader argument ""
+2018-12-04 16:05:22 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+)
+".
+2018-12-04 16:05:22 INFO: (Cacher) Call to method fetch with parameters: $key->"flags".
+2018-12-04 16:05:22 INFO: (Cacher) Call to method read with parameters: $mName->"fetch" and $mParam->"Array
+(
+    [0] => flags
+)
+".
+2018-12-04 16:05:22 INFO: (Cacher) File found.
+2018-12-04 16:05:23 INFO: (Music Downloader) Music downloader argument ""
+2018-12-04 16:07:46 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+)
+".
+2018-12-04 16:07:46 INFO: (Cacher) Call to method fetch with parameters: $key->"flags".
+2018-12-04 16:07:46 INFO: (Cacher) Call to method read with parameters: $mName->"fetch" and $mParam->"Array
+(
+    [0] => flags
+)
+".
+2018-12-04 16:07:46 INFO: (Cacher) File found.
+2018-12-04 16:07:48 INFO: (Music Downloader) Music downloader argument ""
+2018-12-04 16:07:58 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+)
+".
+2018-12-04 16:07:59 INFO: (Cacher) Call to method fetch with parameters: $key->"flags".
+2018-12-04 16:07:59 INFO: (Cacher) Call to method read with parameters: $mName->"fetch" and $mParam->"Array
+(
+    [0] => flags
+)
+".
+2018-12-04 16:07:59 INFO: (Cacher) File found.
+2018-12-04 16:08:00 INFO: (Music Downloader) Music downloader argument ""
+2018-12-04 16:08:11 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+)
+".
+2018-12-04 16:08:11 INFO: (Cacher) Call to method fetch with parameters: $key->"flags".
+2018-12-04 16:08:11 INFO: (Cacher) Call to method read with parameters: $mName->"fetch" and $mParam->"Array
+(
+    [0] => flags
+)
+".
+2018-12-04 16:08:11 INFO: (Cacher) File found.
+2018-12-04 16:08:12 INFO: (Music Downloader) Music downloader argument ""
+2018-12-04 16:10:42 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+)
+".
+2018-12-04 16:10:42 INFO: (Cacher) Call to method fetch with parameters: $key->"flags".
+2018-12-04 16:10:42 INFO: (Cacher) Call to method read with parameters: $mName->"fetch" and $mParam->"Array
+(
+    [0] => flags
+)
+".
+2018-12-04 16:10:42 INFO: (Cacher) File found.
+2018-12-04 16:10:43 INFO: (Music Downloader) Music downloader argument ""
+2018-12-04 16:11:00 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+)
+".
+2018-12-04 16:11:00 INFO: (Cacher) Call to method fetch with parameters: $key->"flags".
+2018-12-04 16:11:00 INFO: (Cacher) Call to method read with parameters: $mName->"fetch" and $mParam->"Array
+(
+    [0] => flags
+)
+".
+2018-12-04 16:11:00 INFO: (Cacher) File found.
+2018-12-04 16:11:01 INFO: (Music Downloader) Music downloader argument ""
+2018-12-04 16:13:33 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+)
+".
+2018-12-04 16:13:33 INFO: (Cacher) Call to method fetch with parameters: $key->"flags".
+2018-12-04 16:13:33 INFO: (Cacher) Call to method read with parameters: $mName->"fetch" and $mParam->"Array
+(
+    [0] => flags
+)
+".
+2018-12-04 16:13:33 INFO: (Cacher) File found.
+2018-12-04 16:13:34 INFO: (Music Downloader) Music downloader argument ""
+2018-12-04 16:14:45 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+)
+".
+2018-12-04 16:14:45 INFO: (Cacher) Call to method fetch with parameters: $key->"flags".
+2018-12-04 16:14:45 INFO: (Cacher) Call to method read with parameters: $mName->"fetch" and $mParam->"Array
+(
+    [0] => flags
+)
+".
+2018-12-04 16:14:45 INFO: (Cacher) File found.
+2018-12-04 16:14:46 INFO: (Music Downloader) Music downloader argument ""
+2018-12-04 16:14:57 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+)
+".
+2018-12-04 16:14:57 INFO: (Cacher) Call to method fetch with parameters: $key->"flags".
+2018-12-04 16:14:57 INFO: (Cacher) Call to method read with parameters: $mName->"fetch" and $mParam->"Array
+(
+    [0] => flags
+)
+".
+2018-12-04 16:14:57 INFO: (Cacher) File found.
+2018-12-04 16:14:58 INFO: (Music Downloader) Music downloader argument ""
+2018-12-04 16:17:10 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+)
+".
+2018-12-04 16:17:10 INFO: (Cacher) Call to method fetch with parameters: $key->"flags".
+2018-12-04 16:17:10 INFO: (Cacher) Call to method read with parameters: $mName->"fetch" and $mParam->"Array
+(
+    [0] => flags
+)
+".
+2018-12-04 16:17:10 INFO: (Cacher) File found.
+2018-12-04 16:17:11 INFO: (Music Downloader) Music downloader argument ""
+2018-12-04 16:17:24 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+)
+".
+2018-12-04 16:17:24 INFO: (Cacher) Call to method fetch with parameters: $key->"flags".
+2018-12-04 16:17:24 INFO: (Cacher) Call to method read with parameters: $mName->"fetch" and $mParam->"Array
+(
+    [0] => flags
+)
+".
+2018-12-04 16:17:24 INFO: (Cacher) File found.
+2018-12-04 16:17:25 INFO: (Music Downloader) Music downloader argument ""
+2018-12-04 16:27:25 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+    [2] => -v
+)
+".
+2018-12-04 16:27:26 INFO: (Music Downloader) Music downloader argument ""
+2018-12-04 16:28:12 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+    [2] => -v
+)
+".
+2018-12-04 16:28:13 INFO: (Music Downloader) Music downloader argument ""
+2018-12-04 16:28:25 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+    [2] => -v
+)
+".
+2018-12-04 16:28:26 INFO: (Music Downloader) Music downloader argument ""
+2018-12-04 16:29:27 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=n8aH4jtGhCw
+    [2] => -v
+)
+".
+2018-12-04 16:29:28 INFO: (Music Downloader) Music downloader argument ""

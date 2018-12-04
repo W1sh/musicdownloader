@@ -16,6 +16,8 @@ Flags para -config
         
 TODO:
         Como procurar vídeos no youtube
-        O video pretendido tem de conter as palavaras todas da procura e o maior numero de visualizações ou gostos
+        O video pretendido tem de conter as palavras todas da procura e o maior numero de visualizações ou gostos
         Procurar e obter o url pretendido
-        Fazer o -config
+        _DONE_Fazer o -config
+
+        <style scope="ytd-live-chat-frame"> para verificar se é stream ou não.
