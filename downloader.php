@@ -76,6 +76,7 @@ final class Downloader{
                 $merged = array_merge($possibleDls, $filteredArray);
             break;
         }
+        print_r($merged[0]);
         $bytes = static::consumeURL($merged[0]["url"]);
         echo strlen($bytes);
     }
@@ -86,9 +87,14 @@ final class Downloader{
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
+        //curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_USERAGENT, static::FIREFOX);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($ch, CURLOPT_SSLVERSION,3);
+        
+        $error = curl_error($ch);
+        echo $error;
 
         return curl_exec($ch);
     }
