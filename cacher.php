@@ -36,9 +36,11 @@ class Cacher {
     }
     /*
     **  Function to read the information contained in the configuration file
+    **  @param $mName -> method name to call after config file is created
+    **  @param $mParam -> method parameters to append to method call after config file is created
     **  @return -> configuration file as json
     */
-    public function read($methodName = false, $mParam = array())
+    public function read($mName = false, $mParam = array())
     {   
         $this->logger->info('Call to function read with $callback->' . "\"".($callback !== false ? $callback : "read")."\"");
         if (is_file($this->file)) {
@@ -48,17 +50,17 @@ class Cacher {
         } else {
             $this->logger->warning('File config.json doesn\'t exist.');
             $this->logger->info('Running file initialization.');
-            $this->initialize($methodName, $mParam);
+            $this->initialize($mName, $mParam);
             return false;
         }
     }
     /*
     **  Function to create the configuration file with default settings
-    **  @param? $callback -> (optional) callback to preceding function
-    **  @param? $callback -> (optional) callback to preceding function
+    **  @param $mName -> method name to call after config file is created
+    **  @param $mParam -> method parameters to append to method call after config file is created
     **  @return -> none
     */
-    public function initialize($methodName, $mParam) 
+    public function initialize($mName, $mParam) 
     {
         $this->logger->info('Created configuration file with name "config.json".');
         $this->logger->info('Started configuration file with value "directory": "downloads"');
@@ -67,11 +69,10 @@ class Cacher {
             sprintf("{\"directory\":\"%s\",\"flags\":[%s]}",
             (sizeof($mParam) > 1 && ($mParam[0] == "directory")) === true ? $mParam[1] : "downloads",
             (sizeof($mParam) > 1 && ($mParam[0] == "flags")) === true ? $mParam[1] : ""));
-        if($methodName === false){
+        if($mName === false){
             $this->read();
         }else{
-            $this->$methodName($mParam[0]);
+            $this->$mName($mParam[0]);
         }
     }
 }
-$cacher = new Cacher();
