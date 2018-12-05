@@ -34,7 +34,7 @@ final class Downloader{
         }
         print_r($links);*/
         $possibleDls = array();
-        $ext="default";
+        $ext="";
         $dLogger->info('Started filtering results based on received $flags->'.'"'.$flags[0].'"'.' parameter');
         switch($flags[0]){
             case "-showall": 
@@ -58,12 +58,31 @@ final class Downloader{
                 $possibleDls = array_filter($dls, function($item){
                     return strpos($item["type"], "Audio Only") !== false;
                 });
-            break;
+                switch(reset($possibleDls)["itag"]){
+                    case "140": 
+                        $ext="mp4";
+                        break;
+                    case "171": case "249": case "250": case "251":
+                        $ext="webm";
+                        break;
+                }
+                break;
             case "-av": 
                 $possibleDls = array_filter($dls, function($item){
                     return strpos($item["type"], "Audio Only") === false 
                     && strpos($item["type"], "Video Only") === false;
                 });
+                switch(reset($possibleDls)["itag"]){
+                    case "18": case "22": 
+                        $ext="mp4";
+                        break;
+                    case "36": case "17": 
+                        $ext="3gp";
+                        break;
+                    case "43":
+                        $ext="webm";
+                        break;
+                }
             break;
             default:
                 $possibleDls = array_filter($dls, function($item) use ($flags){
