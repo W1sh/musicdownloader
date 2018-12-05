@@ -34,16 +34,14 @@ final class Downloader{
         }
         print_r($links);*/
         $possibleDls = array();
-        $ext="";
+        $ext="default";
         $dLogger->info('Started filtering results based on received $flags->'.'"'.$flags[0].'"'.' parameter');
         switch($flags[0]){
             case "-v": 
-                $filteredArray = array_filter($dls, function($item){
+                $possibleDls = array_filter($dls, function($item){
                     return strpos($item["type"], "Video Only") !== false;
                 });
-                $merged = array_merge($possibleDls, $filteredArray);
-                echo $item["itag"];
-                switch($item["itag"]){
+                switch(reset($possibleDls)["itag"]){
                     case "137": case "136": case "135": case "134": case "133": case "160": 
                         $ext="mp4";
                         break;
@@ -53,67 +51,71 @@ final class Downloader{
                 }
                 break;
             case "-a": 
-                $filteredArray = array_filter($dls, function($item){
+                $possibleDls = array_filter($dls, function($item){
                     return strpos($item["type"], "Audio Only") !== false;
                 });
-                $merged = array_merge($possibleDls, $filteredArray);
             break;
             case "-av": 
-                $filteredArray = array_filter($dls, function($item){
+                $possibleDls = array_filter($dls, function($item){
                     return strpos($item["type"], "Audio Only") === false 
                     && strpos($item["type"], "Video Only") === false;
                 });
-                $merged = array_merge($possibleDls, $filteredArray);
             break;
-            case "-mp4": 
-                $filteredArray = array_filter($dls, function($item){
+            default:
+                $possibleDls = array_filter($dls, function($item) use ($flags){
+                    return strpos($item["type"], strtoupper(substr($flags[0], 1)) ) !== false;
+                });
+                $ext=substr($flags[0], 1);
+                break;
+            /*case "-mp4": 
+                $possibleDls = array_filter($dls, function($item){
                     return strpos($item["type"], "MP4") !== false;
                 });
-                $merged = array_merge($possibleDls, $filteredArray);
                 $ext="mp4";
             break;
             case "-3gp": 
-                $filteredArray = array_filter($dls, function($item){
+                $possibleDls = array_filter($dls, function($item){
                     return strpos($item["type"], "3GP") !== false;
                 });
-                $merged = array_merge($possibleDls, $filteredArray);
                 $ext="3gp";
             break;
             case "-webm": 
-                $filteredArray = array_filter($dls, function($item){
+                $possibleDls = array_filter($dls, function($item){
                     return strpos($item["type"], "WEBM") !== false;
                 });
-                $merged = array_merge($possibleDls, $filteredArray);
                 $ext="webm";
             break;
             case "-m4a": 
-                $filteredArray = array_filter($dls, function($item){
+                $possibleDls = array_filter($dls, function($item){
                     return strpos($item["type"], "M4A") !== false;
                 });
-                $merged = array_merge($possibleDls, $filteredArray);
                 $ext="m4a";
-            break;
+            break;*/
         }
-
-        $dCacher = new Cacher();
-        $dir = $dCacher->fetch('directory');
+        if(sizeof($possibleDls)>0){
+            $chosenURL = reset($possibleDls);
+            print_r($chosenURL);
+            $dCacher = new Cacher();
+            $dir = $dCacher->fetch('directory');
         
-        print_r($merged[0]);
-        echo $ext;
-        /*$dLogger->info('Found best match with $url->'.'"'.$merged[0]["url"].'"');
-        $dLogger->info('Created file with name: '.'"'.$title.'.'.$ext.'"')
-        print_r(static::shortenURL($merged[0]['url']));
-        //print_r(urlencode($merged[0]["url"]));
+            //print_r($possibleDls[0]);
+            echo $ext;
+            /*$dLogger->info('Found best match with $url->'.'"'.$merged[0]["url"].'"');
+            $dLogger->info('Created file with name: '.'"'.$title.'.'.$ext.'"')
+            print_r(static::shortenURL($merged[0]['url']));
+            //print_r(urlencode($merged[0]["url"]));
 
-        $clientOS = php_uname("s");
-        $dLogger->info('Identified client operating system as '.'"'.$clientOS.'"');
-        $bytes = static::consumeURL($merged[0]["url"]);
-        $fileName = ($clientOS == "Windows NT")
+            $clientOS = php_uname("s");
+            $dLogger->info('Identified client operating system as '.'"'.$clientOS.'"');
+            $bytes = static::consumeURL($merged[0]["url"]);
+            $fileName = ($clientOS == "Windows NT")
             ? $dir.static::FILE_SEPARATOR_WINDOWS.$title.'.'.$ext
             : $dir.static::FILE_SEPARATOR_LINUX.$title.'.'.$ext;
-        file_put_contents($fileName, $bytes);
-        $dLogger->info('Saved file to location: '.'"'.getcwd().static::FILE_SEPARATOR_WINDOWS.$fileName.'"');
-        */
+            file_put_contents($fileName, $bytes);
+            $dLogger->info('Saved file to location: '.'"'.getcwd().static::FILE_SEPARATOR_WINDOWS.$fileName.'"');*/
+        }else{
+            $dLogger->warning()('Couldn\'t find a link to download.');
+        }
     }
     public static function playlistDownload($url): void
     {
