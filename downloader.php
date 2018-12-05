@@ -87,6 +87,11 @@ final class Downloader{
     {
         //TODO:
     }
+    /*
+    **  Function to consume the video url 
+    **  @param $url -> url to consume
+    **  @return -> bytes of the video
+    */
     private static function consumeURL($url)
     {
         $ch = curl_init();
@@ -103,10 +108,15 @@ final class Downloader{
 
         return curl_exec($ch);
     }
+    /*
+    **  Function to shorten a url using Google's http://goo.gl/ URL shortener
+    **  @param $url -> url to shorten
+    **  @return -> shortened url as string or an error message
+    */
     private static function shortenURL($url)
     {
         $ch = curl_init("http://goo.gl/api/url?url=" . urlencode($url));
-        curl_setopt($ch, CURLOPT_POST      ,1);
+        curl_setopt($ch, CURLOPT_POST,1);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         if($result = curl_exec($ch))
         {
