@@ -2,6 +2,8 @@
 include_once './vendor/madcodez/youtube-downloader/src/YTDownloader.php';
 final class Downloader{
     const FIREFOX = "Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:54.0) Gecko/20100101 Firefox/54.0";
+    const FILE_SEPARATOR_WINDOWS = "\\";
+    const FILE_SEPARATOR_LINUX = "/";
     private function __construct()
     {
         //Private constructer so it can't be instatialized
@@ -32,14 +34,23 @@ final class Downloader{
         }
         print_r($links);*/
         $possibleDls = array();
-        
-        $dLogger->info('Started filtering results based on received $flags parameter');
+        $ext="";
+        $dLogger->info('Started filtering results based on received $flags->'.'"'.$flags[0].'"'.' parameter');
         switch($flags[0]){
             case "-v": 
                 $filteredArray = array_filter($dls, function($item){
                     return strpos($item["type"], "Video Only") !== false;
                 });
                 $merged = array_merge($possibleDls, $filteredArray);
+                echo $item["itag"];
+                switch($item["itag"]){
+                    case "137": case "136": case "135": case "134": case "133": case "160": 
+                        $ext="mp4";
+                        break;
+                    case "248": case "247": case "244": case "243": case "242": case "278": 
+                        $ext="webm";
+                        break;
+                }
                 break;
             case "-a": 
                 $filteredArray = array_filter($dls, function($item){
@@ -59,30 +70,50 @@ final class Downloader{
                     return strpos($item["type"], "MP4") !== false;
                 });
                 $merged = array_merge($possibleDls, $filteredArray);
+                $ext="mp4";
             break;
             case "-3gp": 
                 $filteredArray = array_filter($dls, function($item){
                     return strpos($item["type"], "3GP") !== false;
                 });
                 $merged = array_merge($possibleDls, $filteredArray);
+                $ext="3gp";
             break;
             case "-webm": 
                 $filteredArray = array_filter($dls, function($item){
                     return strpos($item["type"], "WEBM") !== false;
                 });
                 $merged = array_merge($possibleDls, $filteredArray);
+                $ext="webm";
             break;
             case "-m4a": 
                 $filteredArray = array_filter($dls, function($item){
                     return strpos($item["type"], "M4A") !== false;
                 });
                 $merged = array_merge($possibleDls, $filteredArray);
+                $ext="m4a";
             break;
         }
+
+        $dCacher = new Cacher();
+        $dir = $dCacher->fetch('directory');
+        
         print_r($merged[0]);
+        echo $ext;
+        /*$dLogger->info('Found best match with $url->'.'"'.$merged[0]["url"].'"');
+        $dLogger->info('Created file with name: '.'"'.$title.'.'.$ext.'"')
+        print_r(static::shortenURL($merged[0]['url']));
+        //print_r(urlencode($merged[0]["url"]));
+
+        $clientOS = php_uname("s");
+        $dLogger->info('Identified client operating system as '.'"'.$clientOS.'"');
         $bytes = static::consumeURL($merged[0]["url"]);
-        var_dump($bytes);
-        //echo $merged[0]["url"];
+        $fileName = ($clientOS == "Windows NT")
+            ? $dir.static::FILE_SEPARATOR_WINDOWS.$title.'.'.$ext
+            : $dir.static::FILE_SEPARATOR_LINUX.$title.'.'.$ext;
+        file_put_contents($fileName, $bytes);
+        $dLogger->info('Saved file to location: '.'"'.getcwd().static::FILE_SEPARATOR_WINDOWS.$fileName.'"');
+        */
     }
     public static function playlistDownload($url): void
     {
@@ -119,21 +150,15 @@ final class Downloader{
     */
     private static function shortenURL($url)
     {
-        $ch = curl_init("http://goo.gl/api/url?url=" . urlencode($url));
-        curl_setopt($ch, CURLOPT_POST,1);
+        //print_r($url);
+        $ch = curl_init();
+        $params = '{"url": '.$url.'}';
+        $strng = 'http://tinyurl.com/api-create.php?url='.$url;
+        curl_setopt($ch, CURLOPT_URL, $strng);
+        curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        if($result = curl_exec($ch))
-        {
-            $json = json_decode($result);
-            if($error = ($json->error_message))
-            {
-                echo "$error";
-                exit;
-            }
-            $short_url = $json->short_url;
-            return "$short_url";
-        } else {
-            echo curl_error($ch);
-        }
+        curl_setopt($ch, CURLOPT_USERAGENT, static::FIREFOX);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($params));
+        return curl_exec($ch);
     }
 }

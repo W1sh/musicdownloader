@@ -44,9 +44,10 @@ class Cacher {
         $this->logger->info('Call to method fetch with parameters: $key->'.'"'.$key.'".');
         $json = $this->read('fetch', array($key));
         if(isset($json[$key])){
+            $this->logger->info('Fetched value: '.'"'.$json[$key].'"'.' with $key->'.'"'.$key.'".');
             return $json[$key];
         }else{
-            $this->logger->alert('Failed to retrieve $key->'.'"'.$key.'".');
+            $this->logger->alert('Failed to retrieve $key->'.'"'.$key.'". $key does not exist in the configuration file');
             throw new Exception("Non-existant key in configuration file.");
         }
     }
