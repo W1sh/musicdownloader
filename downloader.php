@@ -2,13 +2,16 @@
 include_once './vendor/madcodez/youtube-downloader/src/YTDownloader.php';
 final class Downloader{
     const FIREFOX = "Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:54.0) Gecko/20100101 Firefox/54.0";
-    private function __construct(){
+    private function __construct()
+    {
         //Private constructer so it can't be instatialized
     }
-    private function __clone(){
+    private function __clone()
+    {
         //Private cloner so it can't be cloned
     }
-    public static function findBestMatch($strng, $url){
+    public static function findBestMatch($strng, $url)
+    {
         //TODO:
     }
     public static function singleDownload($url, $flags): void{
@@ -76,14 +79,22 @@ final class Downloader{
                 $merged = array_merge($possibleDls, $filteredArray);
             break;
         }
+        print_r($merged[0]);
         $bytes = static::consumeURL($merged[0]["url"]);
         var_dump($bytes);
         //echo $merged[0]["url"];
     }
-    public static function playlistDownload($url): void{
+    public static function playlistDownload($url): void
+    {
         //TODO:
     }
-    private static function consumeURL($url){
+    /*
+    **  Function to consume the video url 
+    **  @param $url -> url to consume
+    **  @return -> bytes of the video
+    */
+    private static function consumeURL($url)
+    {
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -100,5 +111,29 @@ final class Downloader{
       /*$error = curl_error($ch);
         echo $error;*/
         return curl_exec($ch);
+    }
+    /*
+    **  Function to shorten a url using Google's http://goo.gl/ URL shortener
+    **  @param $url -> url to shorten
+    **  @return -> shortened url as string or an error message
+    */
+    private static function shortenURL($url)
+    {
+        $ch = curl_init("http://goo.gl/api/url?url=" . urlencode($url));
+        curl_setopt($ch, CURLOPT_POST,1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        if($result = curl_exec($ch))
+        {
+            $json = json_decode($result);
+            if($error = ($json->error_message))
+            {
+                echo "$error";
+                exit;
+            }
+            $short_url = $json->short_url;
+            return "$short_url";
+        } else {
+            echo curl_error($ch);
+        }
     }
 }

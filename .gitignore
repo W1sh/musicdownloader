@@ -1,6 +1,5 @@
 vendor/
 composer.lock
 mdtester.php
-php_errors.log
-script.log
+*.log
 *.html

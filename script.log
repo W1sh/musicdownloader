@@ -1045,3 +1045,104 @@
 2018-12-05 12:46:11 INFO: (Downloader) Call to method singleDownloader with parameters $url->"https://www.youtube.com/watch?v=M15_MXQhE5Y" and $flags->"https://www.youtube.com/watch?v=M15_MXQhE5Y"
 2018-12-05 12:46:14 INFO: (Downloader) Started filtering results based on received $flags parameter
 2018-12-05 12:46:34 INFO: (Music Downloader) Music downloader argument ""
+2018-12-04 21:18:17 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=pwGS4Yn5qLo
+    [2] => -v
+)
+".
+2018-12-04 21:18:17 INFO: (Downloader) Call to method singleDownloader with parameters $url->"https://www.youtube.com/watch?v=pwGS4Yn5qLo" and $flags->"https://www.youtube.com/watch?v=pwGS4Yn5qLo"
+2018-12-04 21:18:17 INFO: (Downloader) Started filtering results based on received $flags parameter
+2018-12-04 21:18:17 INFO: (Music Downloader) Music downloader argument ""
+2018-12-04 21:27:34 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=pwGS4Yn5qLo
+    [2] => -v
+)
+".
+2018-12-04 21:27:34 INFO: (Downloader) Call to method singleDownloader with parameters $url->"https://www.youtube.com/watch?v=pwGS4Yn5qLo" and $flags->"https://www.youtube.com/watch?v=pwGS4Yn5qLo"
+2018-12-04 21:27:34 INFO: (Downloader) Started filtering results based on received $flags parameter
+2018-12-04 21:27:34 INFO: (Music Downloader) Music downloader argument ""
+2018-12-04 21:27:46 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=pwGS4Yn5qLo
+    [2] => -v
+)
+".
+2018-12-04 21:27:46 INFO: (Downloader) Call to method singleDownloader with parameters $url->"https://www.youtube.com/watch?v=pwGS4Yn5qLo" and $flags->"https://www.youtube.com/watch?v=pwGS4Yn5qLo"
+2018-12-04 21:27:46 INFO: (Downloader) Started filtering results based on received $flags parameter
+2018-12-05 09:08:53 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=pwGS4Yn5qLo
+    [2] => -v
+)
+".
+2018-12-05 09:08:53 INFO: (Downloader) Call to method singleDownloader with parameters $url->"https://www.youtube.com/watch?v=pwGS4Yn5qLo" and $flags->"https://www.youtube.com/watch?v=pwGS4Yn5qLo"
+2018-12-05 09:08:54 INFO: (Downloader) Started filtering results based on received $flags parameter
+2018-12-05 09:13:29 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=pwGS4Yn5qLo
+    [2] => -v
+)
+".
+2018-12-05 09:13:29 INFO: (Downloader) Call to method singleDownloader with parameters $url->"https://www.youtube.com/watch?v=pwGS4Yn5qLo" and $flags->"https://www.youtube.com/watch?v=pwGS4Yn5qLo"
+2018-12-05 09:13:30 INFO: (Downloader) Started filtering results based on received $flags parameter
+2018-12-05 09:35:32 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=pwGS4Yn5qLo
+    [2] => -v
+)
+".
+2018-12-05 09:35:32 INFO: (Downloader) Call to method singleDownloader with parameters $url->"https://www.youtube.com/watch?v=pwGS4Yn5qLo" and $flags->"https://www.youtube.com/watch?v=pwGS4Yn5qLo"
+2018-12-05 09:35:32 INFO: (Downloader) Started filtering results based on received $flags parameter
+2018-12-05 09:36:29 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=pwGS4Yn5qLo
+    [2] => -v
+)
+".
+2018-12-05 09:36:29 INFO: (Downloader) Call to method singleDownloader with parameters $url->"https://www.youtube.com/watch?v=pwGS4Yn5qLo" and $flags->"https://www.youtube.com/watch?v=pwGS4Yn5qLo"
+2018-12-05 09:36:29 INFO: (Downloader) Started filtering results based on received $flags parameter
+2018-12-05 11:27:07 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=pwGS4Yn5qLo
+    [2] => -v
+)
+".
+2018-12-05 11:27:07 INFO: (Downloader) Call to method singleDownloader with parameters $url->"https://www.youtube.com/watch?v=pwGS4Yn5qLo" and $flags->"https://www.youtube.com/watch?v=pwGS4Yn5qLo"
+2018-12-05 11:27:07 INFO: (Downloader) Started filtering results based on received $flags parameter
+2018-12-05 11:31:01 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=pwGS4Yn5qLo
+    [2] => -v
+)
+".
+2018-12-05 11:31:01 INFO: (Downloader) Call to method singleDownloader with parameters $url->"https://www.youtube.com/watch?v=pwGS4Yn5qLo" and $flags->"https://www.youtube.com/watch?v=pwGS4Yn5qLo"
+2018-12-05 11:31:02 INFO: (Downloader) Started filtering results based on received $flags parameter
+2018-12-05 11:37:22 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=pwGS4Yn5qLo
+    [2] => -v
+)
+".
+2018-12-05 11:37:23 INFO: (Downloader) Call to method singleDownloader with parameters $url->"https://www.youtube.com/watch?v=pwGS4Yn5qLo" and $flags->"https://www.youtube.com/watch?v=pwGS4Yn5qLo"
+2018-12-05 11:37:23 INFO: (Downloader) Started filtering results based on received $flags parameter
+2018-12-05 12:01:56 INFO: (Music Downloader) Call to method download with parameters $arguments: "Array
+(
+    [0] => musicdownloader.php
+    [1] => https://www.youtube.com/watch?v=pwGS4Yn5qLo
+    [2] => -v
+)
+".
+2018-12-05 12:01:56 INFO: (Downloader) Call to method singleDownloader with parameters $url->"https://www.youtube.com/watch?v=pwGS4Yn5qLo" and $flags->"https://www.youtube.com/watch?v=pwGS4Yn5qLo"
+2018-12-05 12:01:57 INFO: (Downloader) Started filtering results based on received $flags parameter
