@@ -37,6 +37,10 @@ final class Downloader{
         $ext="default";
         $dLogger->info('Started filtering results based on received $flags->'.'"'.$flags[0].'"'.' parameter');
         switch($flags[0]){
+            case "-showall": 
+                
+                var_dump($dls);
+            break;
             case "-v": 
                 $possibleDls = array_filter($dls, function($item){
                     return strpos($item["type"], "Video Only") !== false;
@@ -99,7 +103,7 @@ final class Downloader{
             $dir = $dCacher->fetch('directory');
         
             //print_r($possibleDls[0]);
-            echo $ext;
+            //echo $ext;
             /*$dLogger->info('Found best match with $url->'.'"'.$merged[0]["url"].'"');
             $dLogger->info('Created file with name: '.'"'.$title.'.'.$ext.'"')
             print_r(static::shortenURL($merged[0]['url']));

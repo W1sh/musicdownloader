@@ -6,6 +6,7 @@ Flags para download
                 -3gp
                 -webm
                 -m4a
+                -showall
         Flags do Futuro
                 -resoluçao
 
@@ -18,6 +19,8 @@ TODO:
         Como procurar vídeos no youtube
         O video pretendido tem de conter as palavras todas da procura e o maior numero de visualizações ou gostos
         Procurar e obter o url pretendido
-        _DONE_Fazer o -config
+        _DONE_Fazer o -config~
+        Download de varios links
+
 
         <style scope="ytd-live-chat-frame"> para verificar se é stream ou não.
