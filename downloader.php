@@ -38,8 +38,11 @@ final class Downloader{
         $dLogger->info('Started filtering results based on received $flags->'.'"'.$flags[0].'"'.' parameter');
         switch($flags[0]){
             case "-showall": 
+                echo"Available urls:\n";
+                foreach ($dls as $dl) {
+                    echo "\t".$dl["type"]. " -> ".static::shortenURL($dl["url"])."\n";
+                }
                 
-                var_dump($dls);
             break;
             case "-v": 
                 $possibleDls = array_filter($dls, function($item){
