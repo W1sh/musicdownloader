@@ -3,3 +3,4 @@ composer.lock
 mdtester.php
 php_errors.log
 script.log
+*.html

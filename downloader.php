@@ -77,7 +77,8 @@ final class Downloader{
             break;
         }
         $bytes = static::consumeURL($merged[0]["url"]);
-        echo strlen($bytes);
+        var_dump($bytes);
+        //echo $merged[0]["url"];
     }
     public static function playlistDownload($url): void{
         //TODO:
@@ -89,7 +90,15 @@ final class Downloader{
         curl_setopt($ch, CURLOPT_BINARYTRANSFER, true);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_USERAGENT, static::FIREFOX);
-
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        //curl_setopt($ch, CURLOPT_SSLVERSION,3);
+        curl_setopt($ch,CURLOPT_ENCODING,"");
+        curl_setopt($ch, CURLOPT_COOKIEJAR,"1.txt");
+        curl_setopt($ch, CURLOPT_COOKIEFILE,"2.txt");
+        //curl_setopt($ch,CURLOPT_REFERER,"googlevideo.com");
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER,0);
+      /*$error = curl_error($ch);
+        echo $error;*/
         return curl_exec($ch);
     }
 }
