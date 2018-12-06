@@ -110,7 +110,6 @@ function download($arguments, $dLogger){
         }
         Downloader::singleDownload($arguments[1], $flags);
     }
-    $dLogger->info("Music downloader argument \"".$arguments[2]."\"");
 }
 
 echo parseArguments($argv).PHP_EOL;

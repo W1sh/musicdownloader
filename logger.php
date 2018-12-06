@@ -7,7 +7,7 @@ class Logger {
     **  @param $ch -> channel name
     */
     public function __construct($ch){
-        $this->$channel = $ch;
+        $this->channel = $ch;
     }
     /*
     **  Function to store information in the log file
@@ -16,7 +16,7 @@ class Logger {
     */
     function info($strng){
         $time = date('Y-m-d H:i:s');
-        $log = sprintf("%s INFO: (%s) %s".PHP_EOL, $time, $this->$channel, $strng);
+        $log = sprintf("%s INFO: (%s) %s".PHP_EOL, $time, $this->channel, $strng);
         file_put_contents($this->file, $log, FILE_APPEND|LOCK_EX);
     }
     /*
@@ -26,7 +26,7 @@ class Logger {
     */
     function warning($strng){
         $time = date('Y-m-d H:i:s');
-        $log = sprintf("%s WARNING: (%s) %s".PHP_EOL, $time, $this->$channel, $strng);
+        $log = sprintf("%s WARNING: (%s) %s".PHP_EOL, $time, $this->channel, $strng);
         file_put_contents($this->file, $log, FILE_APPEND|LOCK_EX);
     }
     /*
@@ -37,7 +37,7 @@ class Logger {
     */
     function error($strng, $e){
         $time = date('Y-m-d H:i:s');
-        $log = sprintf("%s ERROR: (%s) %s EXCEPTION: %s".PHP_EOL, $time, $this->$channel, $strng, $e);
+        $log = sprintf("%s ERROR: (%s) %s EXCEPTION: %s".PHP_EOL, $time, $this->channel, $strng, $e);
         file_put_contents($this->file, $log, FILE_APPEND|LOCK_EX);
     }
     /*
@@ -47,7 +47,7 @@ class Logger {
     */
     function alert($strng){
         $time = date('Y-m-d H:i:s');
-        $log = sprintf("%s ALERT: (%s) %s".PHP_EOL, $time, $this->$channel, $strng);
+        $log = sprintf("%s ALERT: (%s) %s".PHP_EOL, $time, $this->channel, $strng);
         file_put_contents($this->file, $log, FILE_APPEND|LOCK_EX);
     }
     /*
