@@ -21,6 +21,8 @@ TODO:
         Procurar e obter o url pretendido
         _DONE_Fazer o -config~
         Download de varios links
+        fix pasta nao existir antes do download
+        fix nome do video ser bosta
 
 
         <style scope="ytd-live-chat-frame"> para verificar se é stream ou não.

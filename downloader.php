@@ -36,8 +36,10 @@ class Downloader{
                         echo "\t".$counter++.": ".$dl["type"]. " -> ".$this->shortenURL($dl["url"])."\n";
                     }
                     $line = $this->readline("Which one should downloaded? (insert index number): ");
-                    $chosenURL = $this->shortenURL($possibleDls[intval($line)]["url"]);
-                    print_r($chosenURL);
+                    $chosen = $dls[intval($line)];
+                    $ext = $this->getExtension($chosen);
+                    $bytes = $this->consumeURL($chosen["url"]);
+                    $this->download($bytes, $title, $ext);
                     return;
                 default: 
                     break;    
@@ -45,19 +47,23 @@ class Downloader{
         }else{
             if(strpos($flags[0], "showall") > 0){
                 echo"Available urls:\n";
+                $counter = 0;
                 foreach ($dls as $dl) {
-                    echo "\t".$dl["type"]. " -> " .$this->shortenURL($dl["url"])."\n";
+                    echo "\t".$counter++.": ".$dl["type"]. " -> ".$this->shortenURL($dl["url"])."\n";
                 }
-                $line = $this->readline("Command: ");
-                echo "USER INPUT: ".$line;
+                $line = $this->readline("Which one should downloaded? (insert index number): ");
+                $chosen = $dls[intval($line)];
+                $ext = $this->getExtension($chosen);
+                $bytes = $this->consumeURL($chosen["url"]);
+                $this->download($bytes, $title, $ext);
                 return;
             }else{
                 $possibleDls = $this->filterResults($dls, $flags[0]);
-                $ext = $this->getExtension($possibleDls, $flags[0]);
             }
         }
         if(sizeof($possibleDls)>0){
             $chosenURL = reset($possibleDls);
+            $ext = $this->getExtension($chosenURL);
             $dCacher = new Cacher();
         
             $this->dLogger->info('Found best match with $url->'.'"'.$chosenURL["url"].'"');
@@ -65,7 +71,7 @@ class Downloader{
             print_r($this->shortenURL($chosenURL['url']));
 
             $bytes = $this->consumeURL($chosenURL["url"]);
-            download($bytes, $title, $ext);
+            $this->download($bytes, $title, $ext);
         }else{
             $this->dLogger->warning('Couldn\'t find a link to download.');
         }
@@ -110,64 +116,37 @@ class Downloader{
         curl_close($ch);  
         return $data;  
     }
-
     /*
     **  Function to filter download links based on a received flag
     **  @param $results -> download links
     **  @param $flag -> filter
     **  @return -> filtered results as array
     */
-    private function filterResults($results, $flag){
+    private function filterResults($results, $flag)
+    {
         $possibleDls = array();
-        switch($flag){
+        switch($flag)
+        {
             case "-v": 
                 $possibleDls = array_filter($results, function($item){
                     return strpos($item["type"], "Video Only") !== false;
                 });
-                switch(reset($possibleDls)["itag"]){
-                    case "137": case "136": case "135": case "134": case "133": case "160": 
-                        $ext="mp4";
-                        break;
-                    case "248": case "247": case "244": case "243": case "242": case "278": 
-                        $ext="webm";
-                        break;
-                }
                 break;
             case "-a": 
                 $possibleDls = array_filter($results, function($item){
                     return strpos($item["type"], "Audio Only") !== false;
                 });
-                switch(reset($possibleDls)["itag"]){
-                    case "140": 
-                        $ext="mp4";
-                        break;
-                    case "171": case "249": case "250": case "251":
-                        $ext="webm";
-                        break;
-                }
                 break;
             case "-av": 
                 $possibleDls = array_filter($results, function($item){
                     return strpos($item["type"], "Audio Only") === false 
                     && strpos($item["type"], "Video Only") === false;
                 });
-                switch(reset($possibleDls)["itag"]){
-                    case "18": case "22": 
-                        $ext="mp4";
-                        break;
-                    case "36": case "17": 
-                        $ext="3gp";
-                        break;
-                    case "43":
-                        $ext="webm";
-                        break;
-                }
             break;
             default:
                 $possibleDls = array_filter($results, function($item) use ($flag){
                     return strpos($item["type"], strtoupper(substr($flag, 1)) ) !== false;
                 });
-                $ext=substr($flag, 1);
                 break;
         }
         return $possibleDls;
@@ -178,44 +157,31 @@ class Downloader{
     **  @param $flag -> filter
     **  @return -> extension as string
     */
-    private function getExtension($results, $flag){
+    private function getExtension($object)
+    {
         $ext = "";
-        switch($flag){
-            case "-v": 
-                switch(reset($possibleDls)["itag"]){
-                    case "137": case "136": case "135": case "134": case "133": case "160": 
-                        $ext="mp4";
-                        break;
-                    case "248": case "247": case "244": case "243": case "242": case "278": 
-                        $ext="webm";
-                        break;
-                }
+        switch($object["itag"])
+        {
+            case "137": case "136": case "135": case "134": case "133": case "160": 
+                $ext="mp4";
                 break;
-            case "-a": 
-                switch(reset($possibleDls)["itag"]){
-                    case "140": 
-                        $ext = "mp4";
-                        break;
-                    case "171": case "249": case "250": case "251":
-                        $ext = "webm";
-                        break;
-                }
+            case "248": case "247": case "244": case "243": case "242": case "278": 
+                $ext="webm";
                 break;
-            case "-av": 
-                switch(reset($possibleDls)["itag"]){
-                    case "18": case "22": 
-                        $ext = "mp4";
-                        break;
-                    case "36": case "17": 
-                        $ext = "3gp";
-                        break;
-                    case "43":
-                        $ext = "webm";
-                        break;
-                }
-            break;
-            default:
-                $ext = substr($flag, 1);
+            case "140": 
+                $ext = "mp4";
+                break;
+            case "171": case "249": case "250": case "251":
+                $ext = "webm";
+                break;
+            case "18": case "22": 
+                $ext = "mp4";
+                break;
+            case "36": case "17": 
+                $ext = "3gp";
+                break;
+            case "43":
+                $ext = "webm";
                 break;
         }
         return $ext;
@@ -234,10 +200,9 @@ class Downloader{
     }
 
     // SHOULD BE MOVED TO UTILS.PHP
-    private function readline($prompt = null){
-        if($prompt){
-            echo $prompt;
-        }
+    private function readline($prompt = null)
+    {
+        if($prompt) echo $prompt;
         $fp = fopen("php://stdin","r");
         $line = rtrim(fgets($fp, 1024));
         return $line;
