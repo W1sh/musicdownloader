@@ -31,9 +31,13 @@ class Downloader{
                 case "-showall": 
                     $possibleDls = $this->filterResults($dls, $flags[1]);
                     echo"Available urls:\n";
+                    $counter = 0;
                     foreach ($possibleDls as $dl) {
-                        echo "\t".$dl["type"]. " -> ".$this->shortenURL($dl["url"])."\n";
+                        echo "\t".$counter++.": ".$dl["type"]. " -> ".$this->shortenURL($dl["url"])."\n";
                     }
+                    $line = $this->readline("Which one should downloaded? (insert index number): ");
+                    $chosenURL = $this->shortenURL($possibleDls[intval($line)]["url"]);
+                    print_r($chosenURL);
                     return;
                 default: 
                     break;    
@@ -44,6 +48,8 @@ class Downloader{
                 foreach ($dls as $dl) {
                     echo "\t".$dl["type"]. " -> " .$this->shortenURL($dl["url"])."\n";
                 }
+                $line = $this->readline("Command: ");
+                echo "USER INPUT: ".$line;
                 return;
             }else{
                 $possibleDls = $this->filterResults($dls, $flags[0]);
@@ -53,19 +59,14 @@ class Downloader{
         if(sizeof($possibleDls)>0){
             $chosenURL = reset($possibleDls);
             $dCacher = new Cacher();
-            $dir = $this->dCacher->fetch('directory');
         
             $this->dLogger->info('Found best match with $url->'.'"'.$chosenURL["url"].'"');
             $this->dLogger->info('Created file with name: '.'"'.$title.'.'.$ext.'"');
             print_r($this->shortenURL($chosenURL['url']));
 
-            $clientOS = php_uname("s");
-            $this->dLogger->info('Identified client operating system as '.'"'.$clientOS.'"');
             $bytes = $this->consumeURL($chosenURL["url"]);
-            $fileName = ($clientOS == "Windows NT")
-                ? $dir.static::FILE_SEPARATOR_WINDOWS.$title.'.'.$ext
-                : $dir.static::FILE_SEPARATOR_LINUX.$title.'.'.$ext;
-            file_put_contents($fileName, $bytes);
+            
+            file_put_contents(getFilename($title, $ext), $bytes);
             $this->dLogger->info('Saved file to location: '.'"'.getcwd().static::FILE_SEPARATOR_WINDOWS.$fileName.'"');
         }else{
             $this->dLogger->warning('Couldn\'t find a link to download.');
@@ -220,5 +221,24 @@ class Downloader{
                 break;
         }
         return $ext;
+    }
+
+    private function getFilename($title, $ext){
+        $dir = $this->dCacher->fetch('directory');
+        $clientOS = php_uname("s");
+        $this->dLogger->info('Identified client operating system as '.'"'.$clientOS.'"');
+        $fileName = ($clientOS == "Windows NT")
+                ? $dir.static::FILE_SEPARATOR_WINDOWS.$title.'.'.$ext
+                : $dir.static::FILE_SEPARATOR_LINUX.$title.'.'.$ext;
+    }
+
+    // SHOULD BE MOVED TO UTILS.PHP
+    private function readline($prompt = null){
+        if($prompt){
+            echo $prompt;
+        }
+        $fp = fopen("php://stdin","r");
+        $line = rtrim(fgets($fp, 1024));
+        return $line;
     }
 }
