@@ -65,9 +65,7 @@ class Downloader{
             print_r($this->shortenURL($chosenURL['url']));
 
             $bytes = $this->consumeURL($chosenURL["url"]);
-            
-            file_put_contents(getFilename($title, $ext), $bytes);
-            $this->dLogger->info('Saved file to location: '.'"'.getcwd().static::FILE_SEPARATOR_WINDOWS.$fileName.'"');
+            download($bytes, $title, $ext);
         }else{
             $this->dLogger->warning('Couldn\'t find a link to download.');
         }
@@ -223,13 +221,16 @@ class Downloader{
         return $ext;
     }
 
-    private function getFilename($title, $ext){
+    private function download($bytes, $title, $ext)
+    {
         $dir = $this->dCacher->fetch('directory');
         $clientOS = php_uname("s");
         $this->dLogger->info('Identified client operating system as '.'"'.$clientOS.'"');
         $fileName = ($clientOS == "Windows NT")
                 ? $dir.static::FILE_SEPARATOR_WINDOWS.$title.'.'.$ext
                 : $dir.static::FILE_SEPARATOR_LINUX.$title.'.'.$ext;
+        file_put_contents($fileName, $bytes);
+        $this->dLogger->info('Saved file to location: '.'"'.getcwd().static::FILE_SEPARATOR_WINDOWS.$fileName.'"');
     }
 
     // SHOULD BE MOVED TO UTILS.PHP
