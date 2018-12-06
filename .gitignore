@@ -3,3 +3,4 @@ composer.lock
 mdtester.php
 *.log
 *.html
+cookiejar.txt

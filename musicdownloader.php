@@ -1,7 +1,8 @@
 <?php
-include_once 'downloader.php';
-include_once 'logger.php';
-include_once 'cacher.php';
+include_once 'src/downloader.php';
+include_once 'src/logger.php';
+include_once 'src/cacher.php';
+include_once 'src/utils.php';
 $helpText = "Help \n -init <name>: creates a folder with the inserted name, if name is left empty, the folder name will be downloads; \n 
 -config <> \n";
 $howToUseText = "how to use";
@@ -17,11 +18,7 @@ function parseArguments($arguments){
         $mdLogger->info("Called the \"".$arguments[1]."\" flag");
         switch ($arguments[1]) {
             case "-init": 
-                try {
-                    init($arguments[2],$mdLogger);
-                } catch (Exception $e){
-                    echo("Failed to create dir");
-                }
+                
                 break;
             case "-help": 
                 global $helpText;
@@ -84,15 +81,7 @@ function config($mArg, $dLogger){
     **  @return -> none
     */
 function init($name, $dLogger){
-    $dir=$name;
-    if (!mkdir($dir, 0777, true)) {
-        $dLogger->alert('Failed to create directory with $name: '.'"'.$name.'".');
-        throw new Exception ("Error: No can do");
-    }else{
-        $cacher=new Cacher();
-        $cacher->store("directory", sprintf("%s", $dir));
-        $dLogger->info('Successful init. The folder '.'"'.$name.'"'.' was created.');
-    }
+    
 }
 
 function download($arguments, $dLogger){

@@ -1,5 +1,9 @@
 <?php
 include_once './vendor/madcodez/youtube-downloader/src/YTDownloader.php';
+include_once 'logger.php';
+include_once 'cacher.php';
+include_once 'utils.php';
+
 class Downloader{
     const FIREFOX = "Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:54.0) Gecko/20100101 Firefox/54.0";
     const FILE_SEPARATOR_WINDOWS = "\\";
@@ -35,7 +39,7 @@ class Downloader{
                     foreach ($possibleDls as $dl) {
                         echo "\t".$counter++.": ".$dl["type"]. " -> ".$this->shortenURL($dl["url"])."\n";
                     }
-                    $line = $this->readline("Which one should downloaded? (insert index number): ");
+                    $line = readline("Which one should downloaded? (insert index number): ");
                     $chosen = $dls[intval($line)];
                     $ext = $this->getExtension($chosen);
                     $bytes = $this->consumeURL($chosen["url"]);
@@ -51,7 +55,7 @@ class Downloader{
                 foreach ($dls as $dl) {
                     echo "\t".$counter++.": ".$dl["type"]. " -> ".$this->shortenURL($dl["url"])."\n";
                 }
-                $line = $this->readline("Which one should downloaded? (insert index number): ");
+                $line = readline("Which one should downloaded? (insert index number): ");
                 $chosen = $dls[intval($line)];
                 $ext = $this->getExtension($chosen);
                 $bytes = $this->consumeURL($chosen["url"]);
@@ -85,7 +89,7 @@ class Downloader{
     **  @param $url -> url to consume
     **  @return -> bytes of the video
     */
-    private function consumeURL($url)
+    public function consumeURL($url)
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -195,16 +199,46 @@ class Downloader{
         $fileName = ($clientOS == "Windows NT")
                 ? $dir.static::FILE_SEPARATOR_WINDOWS.$title.'.'.$ext
                 : $dir.static::FILE_SEPARATOR_LINUX.$title.'.'.$ext;
-        file_put_contents($fileName, $bytes);
-        $this->dLogger->info('Saved file to location: '.'"'.getcwd().static::FILE_SEPARATOR_WINDOWS.$fileName.'"');
-    }
+        if(!is_dir(getcwd().($clientOS == "Windows NT" ? static::FILE_SEPARATOR_WINDOWS
+            : static::FILE_SEPARATOR_LINUX).$dir)){
+            $this->dLogger->warning('Couldn\'t find file at location: '.'"'.
+                (getcwd().($clientOS == "Windows NT" ? static::FILE_SEPARATOR_WINDOWS
+                : static::FILE_SEPARATOR_LINUX).$dir).'"');
 
-    // SHOULD BE MOVED TO UTILS.PHP
-    private function readline($prompt = null)
+            //TODO:LOOGERS
+            createDir("downloads",$this->dLogger);
+        }
+        file_put_contents($fileName, $bytes);
+        $this->dLogger->info('Saved file to location: '.'"'.(getcwd().($clientOS == "Windows NT" ?
+            static::FILE_SEPARATOR_WINDOWS : static::FILE_SEPARATOR_LINUX).$fileName).'"');
+    }
+    
+    function urlDiretoParaImagemPorAnaliseDoHtml($pHtml, $pInterestPoint = "\"videoId\":\"")
     {
-        if($prompt) echo $prompt;
-        $fp = fopen("php://stdin","r");
-        $line = rtrim(fgets($fp, 1024));
-        return $line;
+        if (is_string($pHtml) && strlen($pHtml)>0)
+        {
+                $lastPos = 0;
+                $positions = array();
+                while (($lastPos = strpos($pHtml, $pInterestPoint, $lastPos))!== false)
+                {
+                    $positions[] = $lastPos;
+                    $lastPos = $lastPos + strlen($pInterestPoint);
+                }
+                $videoIds = array();
+                foreach ($positions as $value)
+                {
+                    $endIndex = stripos(substr($pHtml, $value + strlen($pInterestPoint)), "\"");
+                    $videoURL = substr($pHtml, $value + strlen($pInterestPoint), $endIndex);
+                    $videoIds[] = $videoURL;
+                }
+                print_r($videoIds);
+                print_r(array_values(array_unique($videoIds)));
+        } 
+        return false; 
     }
 }
+
+/*$downloader = new Downloader();
+$html=$downloader->consumeURL("https://www.youtube.com/playlist?list=PLuUrokoVSxlcgocBXbDF76yWd3YKWpOH9");
+echo $html;
+echo $downloader->urlDiretoParaImagemPorAnaliseDoHtml($html);*/
