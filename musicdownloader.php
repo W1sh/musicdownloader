@@ -108,7 +108,8 @@ function download($arguments, $dLogger){
             $cacher=new Cacher();
             $flags = $cacher->fetch("flags");
         }
-        Downloader::singleDownload($arguments[1], $flags);
+        $downloader = new Downloader();
+        $downloader->singleDownload($arguments[1], $flags);
     }
 }
 

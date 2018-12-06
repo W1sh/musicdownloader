@@ -1,38 +1,38 @@
 <?php
 include_once './vendor/madcodez/youtube-downloader/src/YTDownloader.php';
-final class Downloader{
+class Downloader{
     const FIREFOX = "Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:54.0) Gecko/20100101 Firefox/54.0";
     const FILE_SEPARATOR_WINDOWS = "\\";
     const FILE_SEPARATOR_LINUX = "/";
-    private function __construct()
+    private $dLogger;
+    private $youtubedl;
+    private $dCacher;
+    public function __construct()
     {
-        //Private constructer so it can't be instatialized
+        $this->dLogger = new Logger("Downloader");
+        $this->youtubedl = new YTDownloader();
+        $this->dCacher = new Cacher();
     }
-    private function __clone()
-    {
-        //Private cloner so it can't be cloned
-    }
-    public static function findBestMatch($strng, $url)
+    public function findBestMatch($strng, $url)
     {
         //TODO:
     }
-    public static function singleDownload($url, $flags): void{
-        $dLogger = new Logger("Downloader");
-        $dLogger->info('Call to method singleDownloader with parameters $url->'.'"'.$url.'" and $flags->'.'"'.$url.'"');
-        $youtube = new YTDownloader();
-        $results = $youtube->getDownloadLinks($url);
+    public function singleDownload($url, $flags): void{
+        
+        $this->dLogger->info('Call to method singleDownloader with parameters $url->'.'"'.$url.'" and $flags->'.'"'.$url.'"');
+        $results = $this->youtubedl->getDownloadLinks($url);
         $info = $results["info"];
         $title = $info["Title"];
         $dls = $results["dl"];
 
-        $dLogger->info('Started filtering results based on received $flags->'.'"'.$flags[0].'"'.' parameter');
+        $this->dLogger->info('Started filtering results based on received $flags->'.'"'.$flags[0].'"'.' parameter');
         if(sizeof($flags)>1){
             switch($flags[0]){
                 case "-showall": 
-                    $possibleDls = static::filterResults($dls, $flags[1]);
+                    $possibleDls = $this->filterResults($dls, $flags[1]);
                     echo"Available urls:\n";
                     foreach ($possibleDls as $dl) {
-                        echo "\t".$dl["type"]. " -> ".static::shortenURL($dl["url"])."\n";
+                        echo "\t".$dl["type"]. " -> ".$this->shortenURL($dl["url"])."\n";
                     }
                     return;
                 default: 
@@ -42,36 +42,36 @@ final class Downloader{
             if(strpos($flags[0], "showall") > 0){
                 echo"Available urls:\n";
                 foreach ($dls as $dl) {
-                    echo "\t".$dl["type"]. " -> " .static::shortenURL($dl["url"])."\n";
+                    echo "\t".$dl["type"]. " -> " .$this->shortenURL($dl["url"])."\n";
                 }
                 return;
             }else{
-                $possibleDls = static::filterResults($dls, $flags[0]);
-                $ext = static::getExtension($possibleDls, $flags[0]);
+                $possibleDls = $this->filterResults($dls, $flags[0]);
+                $ext = $this->getExtension($possibleDls, $flags[0]);
             }
         }
         if(sizeof($possibleDls)>0){
             $chosenURL = reset($possibleDls);
             $dCacher = new Cacher();
-            $dir = $dCacher->fetch('directory');
+            $dir = $this->dCacher->fetch('directory');
         
-            $dLogger->info('Found best match with $url->'.'"'.$chosenURL["url"].'"');
-            $dLogger->info('Created file with name: '.'"'.$title.'.'.$ext.'"');
-            print_r(static::shortenURL($chosenURL['url']));
+            $this->dLogger->info('Found best match with $url->'.'"'.$chosenURL["url"].'"');
+            $this->dLogger->info('Created file with name: '.'"'.$title.'.'.$ext.'"');
+            print_r($this->shortenURL($chosenURL['url']));
 
             $clientOS = php_uname("s");
-            $dLogger->info('Identified client operating system as '.'"'.$clientOS.'"');
-            $bytes = static::consumeURL($chosenURL["url"]);
+            $this->dLogger->info('Identified client operating system as '.'"'.$clientOS.'"');
+            $bytes = $this->consumeURL($chosenURL["url"]);
             $fileName = ($clientOS == "Windows NT")
                 ? $dir.static::FILE_SEPARATOR_WINDOWS.$title.'.'.$ext
                 : $dir.static::FILE_SEPARATOR_LINUX.$title.'.'.$ext;
             file_put_contents($fileName, $bytes);
-            $dLogger->info('Saved file to location: '.'"'.getcwd().static::FILE_SEPARATOR_WINDOWS.$fileName.'"');
+            $this->dLogger->info('Saved file to location: '.'"'.getcwd().static::FILE_SEPARATOR_WINDOWS.$fileName.'"');
         }else{
-            $dLogger->warning('Couldn\'t find a link to download.');
+            $this->dLogger->warning('Couldn\'t find a link to download.');
         }
     }
-    public static function playlistDownload($url): void
+    public function playlistDownload($url): void
     {
         //TODO:
     }
@@ -80,7 +80,7 @@ final class Downloader{
     **  @param $url -> url to consume
     **  @return -> bytes of the video
     */
-    private static function consumeURL($url)
+    private function consumeURL($url)
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -101,7 +101,7 @@ final class Downloader{
     **  @param $url -> url to shorten
     **  @return -> shortened url as string
     */
-    private static function shortenURL($url)  {  
+    private function shortenURL($url)  {  
         $ch = curl_init();  
         $timeout = 5;  
         curl_setopt($ch,CURLOPT_URL,'http://tinyurl.com/api-create.php?url='.$url);  
@@ -118,7 +118,7 @@ final class Downloader{
     **  @param $flag -> filter
     **  @return -> filtered results as array
     */
-    private static function filterResults($results, $flag){
+    private function filterResults($results, $flag){
         $possibleDls = array();
         switch($flag){
             case "-v": 
@@ -179,7 +179,7 @@ final class Downloader{
     **  @param $flag -> filter
     **  @return -> extension as string
     */
-    private static function getExtension($results, $flag){
+    private function getExtension($results, $flag){
         $ext = "";
         switch($flag){
             case "-v": 
