@@ -1,4 +1,5 @@
 vendor/
+downloads/
 composer.lock
 mdtester.php
 *.log

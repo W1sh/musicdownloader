@@ -86,19 +86,22 @@ function init($name, $dLogger){
 
 function download($arguments, $dLogger){
     $dLogger->info('Call to method download with parameters $arguments: '.'"'.print_r($arguments, true).'".');
-    $pos = strpos($arguments[1], "https://www.youtube.com/watch");
-    if($pos === false){
+    $isVideo = strpos($arguments[1], "https://www.youtube.com/watch") !== false;
+    $isPlaylist = strpos($arguments[1], "https://www.youtube.com/playlist") !== false;
+    $downloader = new Downloader();
+    if(sizeof($arguments)>2){
+        $flags = array_splice($arguments, 2);
+    }else{
+        $cacher = new Cacher();
+        $flags = $cacher->fetch("flags");
+    }
+    if($isVideo){
+        $downloader->singleDownload($arguments[1], $flags);
+    }else if($isPlaylist){
+        $downloader->playlistDownload($arguments[1], $flags);
+    }else{
         $dLogger->alert('Invalid $url: '.'"'.$arguments[1].'".');
         throw new Exception ("Invalid url received");
-    }else{
-        if(sizeof($arguments)>2){
-            $flags = array_splice($arguments, 2);
-        }else{
-            $cacher=new Cacher();
-            $flags = $cacher->fetch("flags");
-        }
-        $downloader = new Downloader();
-        $downloader->singleDownload($arguments[1], $flags);
     }
 }
 

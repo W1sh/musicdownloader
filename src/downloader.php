@@ -25,8 +25,13 @@ class Downloader{
         
         $this->dLogger->info('Call to method singleDownloader with parameters $url->'.'"'.$url.'" and $flags->'.'"'.$url.'"');
         $results = $this->youtubedl->getDownloadLinks($url);
+        if($results === false){
+            $this->dLogger->info('Video at $url->'.'"'.$url.'" is unavailable');
+            return;
+        }
         $info = $results["info"];
-        $title = $info["Title"];
+        $vowels = array("/", "\\", "<", ">", ":", "\"", "|", "?", "*");
+        $title = str_replace("/", "", $info["Title"]);
         $dls = $results["dl"];
 
         $this->dLogger->info('Started filtering results based on received $flags->'.'"'.$flags[0].'"'.' parameter');
@@ -42,8 +47,9 @@ class Downloader{
                     $line = readline("Which one should downloaded? (insert index number): ");
                     $chosen = $dls[intval($line)];
                     $ext = $this->getExtension($chosen);
+                    $fileLocation = $this->getFileLocation($title, $ext);
                     $bytes = $this->consumeURL($chosen["url"]);
-                    $this->download($bytes, $title, $ext);
+                    $this->download($bytes, $fileLocation);
                     return;
                 default: 
                     break;    
@@ -58,31 +64,66 @@ class Downloader{
                 $line = readline("Which one should downloaded? (insert index number): ");
                 $chosen = $dls[intval($line)];
                 $ext = $this->getExtension($chosen);
+                $fileLocation = $this->getFileLocation($title, $ext);
                 $bytes = $this->consumeURL($chosen["url"]);
-                $this->download($bytes, $title, $ext);
+                $this->download($bytes, $fileLocation);
                 return;
             }else{
                 $possibleDls = $this->filterResults($dls, $flags[0]);
             }
         }
         if(sizeof($possibleDls)>0){
-            $chosenURL = reset($possibleDls);
-            $ext = $this->getExtension($chosenURL);
+            $chosen = reset($possibleDls);
             $dCacher = new Cacher();
-        
-            $this->dLogger->info('Found best match with $url->'.'"'.$chosenURL["url"].'"');
-            $this->dLogger->info('Created file with name: '.'"'.$title.'.'.$ext.'"');
-            print_r($this->shortenURL($chosenURL['url']));
-
-            $bytes = $this->consumeURL($chosenURL["url"]);
-            $this->download($bytes, $title, $ext);
+            $this->dLogger->info('Found best match with $url->'.'"'.$chosen["url"].'"');
+            echo "DONE: ".$title.PHP_EOL;
+            $ext = $this->getExtension($chosen);
+            $fileLocation = $this->getFileLocation($title, $ext);
+            $bytes = $this->consumeURL($chosen["url"]);
+            $this->download($bytes, $fileLocation);
         }else{
             $this->dLogger->warning('Couldn\'t find a link to download.');
         }
     }
-    public function playlistDownload($url): void
+    public function playlistDownload($url, $flags): void
     {
-        //TODO:
+        $pHtml = $this->consumeURL($url);
+        $pInterestPoint = "\"videoId\":\"";
+        if (is_string($pHtml) && strlen($pHtml)>0)
+        {
+                $lastPos = 0;
+                $positions = array();
+                while (($lastPos = strpos($pHtml, $pInterestPoint, $lastPos))!== false)
+                {
+                    $positions[] = $lastPos;
+                    $lastPos = $lastPos + strlen($pInterestPoint);
+                }
+                $videoIds = array();
+                foreach ($positions as $value)
+                {
+                    $endIndex = stripos(substr($pHtml, $value + strlen($pInterestPoint)), "\"");
+                    $videoURL = substr($pHtml, $value + strlen($pInterestPoint), $endIndex);
+                    $videoIds[] = $videoURL;
+                }
+                print_r($videoIds);
+                print_r(array_values(array_unique($videoIds)));
+
+                if(strpos($flags[0], "showall") > 0){
+                    echo "WUT";
+                    // log error
+                }else if(sizeof($flags)>1){
+                    echo "WUT2";
+                    // log error
+                }else{
+                    foreach(array_unique($videoIds) as $id){
+                        $this->singleDownload("https://www.youtube.com/watch?v=".$id, $flags);
+                    }
+                    return;
+                }
+        }else{
+            // log error
+            return;
+        }
     }
     /*
     **  Function to consume the video url 
@@ -191,12 +232,12 @@ class Downloader{
         return $ext;
     }
 
-    private function download($bytes, $title, $ext)
+    private function getFileLocation($title, $ext)
     {
         $dir = $this->dCacher->fetch('directory');
         $clientOS = php_uname("s");
         $this->dLogger->info('Identified client operating system as '.'"'.$clientOS.'"');
-        $fileName = ($clientOS == "Windows NT")
+        $fileLocation = ($clientOS == "Windows NT")
                 ? $dir.static::FILE_SEPARATOR_WINDOWS.$title.'.'.$ext
                 : $dir.static::FILE_SEPARATOR_LINUX.$title.'.'.$ext;
         if(!is_dir(getcwd().($clientOS == "Windows NT" ? static::FILE_SEPARATOR_WINDOWS
@@ -206,11 +247,15 @@ class Downloader{
                 : static::FILE_SEPARATOR_LINUX).$dir).'"');
 
             //TODO:LOOGERS
-            createDir("downloads",$this->dLogger);
+            createDir("downloads", $this->dLogger);
         }
-        file_put_contents($fileName, $bytes);
-        $this->dLogger->info('Saved file to location: '.'"'.(getcwd().($clientOS == "Windows NT" ?
-            static::FILE_SEPARATOR_WINDOWS : static::FILE_SEPARATOR_LINUX).$fileName).'"');
+        return $fileLocation;
+    }
+
+    private function download($bytes, $fileLocation)
+    {
+        file_put_contents($fileLocation, $bytes);
+        $this->dLogger->info('Saved file to location: '.'"'.(getcwd().$fileLocation).'"');
     }
     
     function urlDiretoParaImagemPorAnaliseDoHtml($pHtml, $pInterestPoint = "\"videoId\":\"")
@@ -239,6 +284,4 @@ class Downloader{
 }
 
 /*$downloader = new Downloader();
-$html=$downloader->consumeURL("https://www.youtube.com/playlist?list=PLuUrokoVSxlcgocBXbDF76yWd3YKWpOH9");
-echo $html;
-echo $downloader->urlDiretoParaImagemPorAnaliseDoHtml($html);*/
+*/

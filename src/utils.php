@@ -1,12 +1,15 @@
 <?php
 include_once"cacher.php";
+
 function readline($prompt = null)
 {
     if($prompt) echo $prompt;
     $fp = fopen("php://stdin","r");
     $line = rtrim(fgets($fp, 1024));
     return $line;
-}function createDir($name, $dLogger){
+}
+
+function createDir($name, $dLogger){
     $clientOS = php_uname("s");
     $dir= getcwd().($clientOS == "Windows NT" ? Downloader::FILE_SEPARATOR_WINDOWS
     : Downloader::FILE_SEPARATOR_LINUX).$name;

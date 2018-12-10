@@ -6,9 +6,9 @@ Flags para download
                 -3gp
                 -webm
                 -m4a
-                -showall
+                -showall 
         Flags do Futuro
-                -resoluçao
+                -multi
 
 Flags para -config
         -dir: mudar o diretorio
@@ -19,10 +19,11 @@ TODO:
         Como procurar vídeos no youtube
         O video pretendido tem de conter as palavras todas da procura e o maior numero de visualizações ou gostos
         Procurar e obter o url pretendido
-        _DONE_Fazer o -config~
+        _DONE_ Fazer o -config~
         Download de varios links
         fix pasta nao existir antes do download
         fix nome do video ser bosta
+        _DONE_ fix link conter mais do videos do que os pedidos
 
 
         <style scope="ytd-live-chat-frame"> para verificar se é stream ou não.
