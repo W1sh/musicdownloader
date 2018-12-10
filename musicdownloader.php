@@ -85,7 +85,7 @@ function init($name, $dLogger){
 }
 
 function download($arguments, $dLogger){
-    $dLogger->info('Call to method download with parameters $arguments: '.'"'.print_r($arguments, true).'".');
+    $dLogger->info('Call to method download with parameters $arguments: '.'"'.str_replace("\n", "", print_r($arguments, true)).'".');
     $isVideo = strpos($arguments[1], "https://www.youtube.com/watch") !== false;
     $isPlaylist = strpos($arguments[1], "https://www.youtube.com/playlist") !== false;
     $downloader = new Downloader();

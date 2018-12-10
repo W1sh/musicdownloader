@@ -19,6 +19,6 @@ function createDir($name, $dLogger){
     }else{
         $cacher=new Cacher();
         $cacher->store("directory", sprintf("%s", $name));
-        $dLogger->info('Successful init. The folder '.'"'.$name.'"'.' was created.');
+        $dLogger->info('Created default downloads folder with name: '.$name.' at '.'"'.$dir.'"');
     }
 }

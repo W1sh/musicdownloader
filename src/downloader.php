@@ -238,16 +238,13 @@ class Downloader{
         $clientOS = php_uname("s");
         $this->dLogger->info('Identified client operating system as '.'"'.$clientOS.'"');
         $fileLocation = ($clientOS == "Windows NT")
-                ? $dir.static::FILE_SEPARATOR_WINDOWS.$title.'.'.$ext
-                : $dir.static::FILE_SEPARATOR_LINUX.$title.'.'.$ext;
-        if(!is_dir(getcwd().($clientOS == "Windows NT" ? static::FILE_SEPARATOR_WINDOWS
-            : static::FILE_SEPARATOR_LINUX).$dir)){
-            $this->dLogger->warning('Couldn\'t find file at location: '.'"'.
-                (getcwd().($clientOS == "Windows NT" ? static::FILE_SEPARATOR_WINDOWS
-                : static::FILE_SEPARATOR_LINUX).$dir).'"');
-
-            //TODO:LOOGERS
-            createDir("downloads", $this->dLogger);
+            ? $dir.static::FILE_SEPARATOR_WINDOWS.$title.'.'.$ext
+            : $dir.static::FILE_SEPARATOR_LINUX.$title.'.'.$ext;
+        $dirLocation = (getcwd().($clientOS == "Windows NT" ? static::FILE_SEPARATOR_WINDOWS
+            : static::FILE_SEPARATOR_LINUX).$dir);
+        if(!is_dir($dirLocation)){
+            $this->dLogger->warning('Couldn\'t find file at location: '.'"'.$dirLocation.'"');
+            createDir($dir, $this->dLogger);
         }
         return $fileLocation;
     }
@@ -255,33 +252,7 @@ class Downloader{
     private function download($bytes, $fileLocation)
     {
         file_put_contents($fileLocation, $bytes);
-        $this->dLogger->info('Saved file to location: '.'"'.(getcwd().$fileLocation).'"');
-    }
-    
-    function urlDiretoParaImagemPorAnaliseDoHtml($pHtml, $pInterestPoint = "\"videoId\":\"")
-    {
-        if (is_string($pHtml) && strlen($pHtml)>0)
-        {
-                $lastPos = 0;
-                $positions = array();
-                while (($lastPos = strpos($pHtml, $pInterestPoint, $lastPos))!== false)
-                {
-                    $positions[] = $lastPos;
-                    $lastPos = $lastPos + strlen($pInterestPoint);
-                }
-                $videoIds = array();
-                foreach ($positions as $value)
-                {
-                    $endIndex = stripos(substr($pHtml, $value + strlen($pInterestPoint)), "\"");
-                    $videoURL = substr($pHtml, $value + strlen($pInterestPoint), $endIndex);
-                    $videoIds[] = $videoURL;
-                }
-                print_r($videoIds);
-                print_r(array_values(array_unique($videoIds)));
-        } 
-        return false; 
+        $this->dLogger->info('Saved file to location: '.'"'.(getcwd().(php_uname("s") == "Windows NT" ?
+            static::FILE_SEPARATOR_WINDOWS : static::FILE_SEPARATOR_LINUX).$fileLocation).'"');
     }
 }
-
-/*$downloader = new Downloader();
-*/

@@ -1,6 +1,6 @@
 <?php
 class Logger {
-    private $file = "script.log";
+    private $file = "logs/script.log";
     private $channel = "default";
     /*
     **  Constructor

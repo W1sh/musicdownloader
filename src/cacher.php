@@ -59,7 +59,7 @@ class Cacher {
     */
     public function read($mName = false, $mParam = array())
     {   
-        $this->logger->info('Call to method read with parameters: $mName->'.'"'.$mName.'"'.' and $mParam->'.'"'.print_r($mParam, true).'".');
+        $this->logger->info('Call to method read with parameters: $mName->'.'"'.$mName.'"'.' and $mParam->'.'"'.str_replace("\n", "", print_r($mParam, true)).'".');
         if (is_file($this->file)) {
             $this->logger->info('File found.');
             $json = json_decode(file_get_contents($this->file), true);
@@ -79,7 +79,7 @@ class Cacher {
     */
     public function initialize($mName, $mParam) 
     {   
-        $this->logger->info('Call to method read with parameters: $mName->'.'"'.$mName.'"'.' and $mParam->'.'"'.print_r($mParam, true).'".');
+        $this->logger->info('Call to method read with parameters: $mName->'.'"'.$mName.'"'.' and $mParam->'.'"'.str_replace("\n", "", print_r($mParam, true)).'".');
         $this->logger->info('Created configuration file with name "config.json".');
         $this->logger->info('Started configuration file with value "directory": "downloads".');
         $this->logger->info('Started configuration file with value "flags": "[]".');
