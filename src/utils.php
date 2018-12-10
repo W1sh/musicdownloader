@@ -1,6 +1,9 @@
 <?php
 include_once"cacher.php";
 
+define('SEPARATOR_WIN', '\\');
+define('SEPARATOR_LINUX', '/');
+
 function readline($prompt = null)
 {
     if($prompt) echo $prompt;
@@ -11,8 +14,7 @@ function readline($prompt = null)
 
 function createDir($name, $dLogger){
     $clientOS = php_uname("s");
-    $dir= getcwd().($clientOS == "Windows NT" ? Downloader::FILE_SEPARATOR_WINDOWS
-    : Downloader::FILE_SEPARATOR_LINUX).$name;
+    $dir= getcwd().($clientOS == "Windows NT" ? SEPARATOR_WIN : SEPARATOR_LINUX).$name;
     if (!mkdir($dir, 0777, true)) {
         $dLogger->alert('Failed to create directory with $name: '.'"'.$name.'".');
         throw new Exception ("Error: No can do");

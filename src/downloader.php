@@ -6,8 +6,6 @@ include_once 'utils.php';
 
 class Downloader{
     const FIREFOX = "Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:54.0) Gecko/20100101 Firefox/54.0";
-    const FILE_SEPARATOR_WINDOWS = "\\";
-    const FILE_SEPARATOR_LINUX = "/";
     private $dLogger;
     private $youtubedl;
     private $dCacher;
@@ -47,9 +45,10 @@ class Downloader{
                     $line = readline("Which one should downloaded? (insert index number): ");
                     $chosen = $dls[intval($line)];
                     $ext = $this->getExtension($chosen);
-                    $fileLocation = $this->getFileLocation($title, $ext);
+                    $fileLocation = $this->getFileLocation();
+                    $fileName = $title.$ext;
                     $bytes = $this->consumeURL($chosen["url"]);
-                    $this->download($bytes, $fileLocation);
+                    $this->download($bytes, $fileLocation, $fileName);
                     return;
                 default: 
                     break;    
@@ -64,9 +63,10 @@ class Downloader{
                 $line = readline("Which one should downloaded? (insert index number): ");
                 $chosen = $dls[intval($line)];
                 $ext = $this->getExtension($chosen);
-                $fileLocation = $this->getFileLocation($title, $ext);
+                $fileLocation = $this->getFileLocation();
+                $fileName = $title.$ext;
                 $bytes = $this->consumeURL($chosen["url"]);
-                $this->download($bytes, $fileLocation);
+                $this->download($bytes, $fileLocation, $fileName);
                 return;
             }else{
                 $possibleDls = $this->filterResults($dls, $flags[0]);
@@ -79,8 +79,9 @@ class Downloader{
             echo "DONE: ".$title.PHP_EOL;
             $ext = $this->getExtension($chosen);
             $fileLocation = $this->getFileLocation($title, $ext);
+            $fileName = $title.$ext;
             $bytes = $this->consumeURL($chosen["url"]);
-            $this->download($bytes, $fileLocation);
+            $this->download($bytes, $fileLocation, $fileName);
         }else{
             $this->dLogger->warning('Couldn\'t find a link to download.');
         }
@@ -196,7 +197,7 @@ class Downloader{
         }
         return $possibleDls;
     }
-     /*
+    /*
     **  Function to get the extension for the file, from a array of possible links
     **  @param $results -> download links
     **  @param $flag -> filter
@@ -208,51 +209,56 @@ class Downloader{
         switch($object["itag"])
         {
             case "137": case "136": case "135": case "134": case "133": case "160": 
-                $ext="mp4";
+                $ext=".mp4";
                 break;
             case "248": case "247": case "244": case "243": case "242": case "278": 
-                $ext="webm";
+                $ext=".webm";
                 break;
             case "140": 
-                $ext = "mp4";
+                $ext = ".mp4";
                 break;
             case "171": case "249": case "250": case "251":
-                $ext = "webm";
+                $ext = ".webm";
                 break;
             case "18": case "22": 
-                $ext = "mp4";
+                $ext = ".mp4";
                 break;
             case "36": case "17": 
-                $ext = "3gp";
+                $ext = ".3gp";
                 break;
             case "43":
-                $ext = "webm";
+                $ext = ".webm";
                 break;
         }
         return $ext;
     }
-
-    private function getFileLocation($title, $ext)
+    /*
+    **  Function to get the file location
+    **  @return -> desired location for the file
+    */
+    private function getFileLocation()
     {
         $dir = $this->dCacher->fetch('directory');
         $clientOS = php_uname("s");
         $this->dLogger->info('Identified client operating system as '.'"'.$clientOS.'"');
-        $fileLocation = ($clientOS == "Windows NT")
-            ? $dir.static::FILE_SEPARATOR_WINDOWS.$title.'.'.$ext
-            : $dir.static::FILE_SEPARATOR_LINUX.$title.'.'.$ext;
-        $dirLocation = (getcwd().($clientOS == "Windows NT" ? static::FILE_SEPARATOR_WINDOWS
-            : static::FILE_SEPARATOR_LINUX).$dir);
+        $dirLocation = (getcwd().($clientOS == "Windows NT" ? SEPARATOR_WIN : SEPARATOR_LINUX).$dir);
         if(!is_dir($dirLocation)){
             $this->dLogger->warning('Couldn\'t find file at location: '.'"'.$dirLocation.'"');
             createDir($dir, $this->dLogger);
         }
-        return $fileLocation;
+        return $dirLocation;
     }
-
-    private function download($bytes, $fileLocation)
+    /*
+    **  Function to place downloaded bytes into a file
+    **  @param $bytes -> bytes received after consuming the url
+    **  @param $fileLocation -> where to place the file (includes file name)
+    **  @return -> none
+    */
+    private function download($bytes, $fileLocation, $fileName): void
     {
-        file_put_contents($fileLocation, $bytes);
-        $this->dLogger->info('Saved file to location: '.'"'.(getcwd().(php_uname("s") == "Windows NT" ?
-            static::FILE_SEPARATOR_WINDOWS : static::FILE_SEPARATOR_LINUX).$fileLocation).'"');
+        file_put_contents($fileLocation.(php_uname("s") == "Windows NT" 
+            ? SEPARATOR_WIN : SEPARATOR_LINUX).$fileName, $bytes);
+        $this->dLogger->info('Saved file to location: '.'"'.(getcwd().(php_uname("s") == "Windows NT" 
+            ? SEPARATOR_WIN : SEPARATOR_LINUX).$fileLocation).'"');
     }
 }
