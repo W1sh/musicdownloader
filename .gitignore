@@ -1,7 +1,8 @@
 vendor/
 downloads/
+logs/
 composer.lock
 mdtester.php
-*.log
-*.html
 cookiejar.txt
+php_errors.log
+test.php

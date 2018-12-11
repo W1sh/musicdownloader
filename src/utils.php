@@ -4,6 +4,11 @@ include_once"cacher.php";
 define('SEPARATOR_WIN', '\\');
 define('SEPARATOR_LINUX', '/');
 
+/*
+**  Function to read input line from the command line
+**  @param $prompt -> message to display in the console
+**  @return -> user input
+*/
 function readline($prompt = null)
 {
     if($prompt) echo $prompt;
@@ -11,7 +16,13 @@ function readline($prompt = null)
     $line = rtrim(fgets($fp, 1024));
     return $line;
 }
-
+/*
+**  Function to create a folder
+**  @param $name -> name of the folder
+**  @param $dLogger -> logger to record function
+**  @throws Exception -> If the file could not be created
+**  @return -> none
+*/
 function createDir($name, $dLogger){
     $clientOS = php_uname("s");
     $dir= getcwd().($clientOS == "Windows NT" ? SEPARATOR_WIN : SEPARATOR_LINUX).$name;
