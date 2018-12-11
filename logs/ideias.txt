@@ -20,9 +20,8 @@ TODO:
         O video pretendido tem de conter as palavras todas da procura e o maior numero de visualizações ou gostos
         Procurar e obter o url pretendido
         _DONE_ Fazer o -config~
-        Download de varios links
-        fix pasta nao existir antes do download
-        fix nome do video ser bosta
+        _DONE_ fix pasta nao existir antes do download
+        _DONE_ fix nome do video ser bosta
         _DONE_ fix link conter mais do videos do que os pedidos
 
 

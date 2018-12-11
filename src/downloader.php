@@ -15,10 +15,12 @@ class Downloader{
         $this->youtubedl = new YTDownloader();
         $this->dCacher = new Cacher();
     }
-    public function findBestMatch($strng, $url)
-    {
-        //TODO:
-    }
+    /*
+    **  Function to download a single video from a youtube link
+    **  @param $url -> link to the youtube playlist
+    **  @param $flags -> type of extension preferred or setting
+    **  @return -> none
+    */
     public function singleDownload($url, $flags): void{
         
         $this->dLogger->info('Call to method singleDownloader with parameters $url->'.'"'.$url.'" and $flags->'.'"'.$url.'"');
@@ -86,6 +88,12 @@ class Downloader{
             $this->dLogger->warning('Couldn\'t find a link to download.');
         }
     }
+    /*
+    **  Function to download videos from a youtube playlist
+    **  @param $url -> link to the youtube playlist
+    **  @param $flags -> type of extension preferred or setting
+    **  @return -> none
+    */
     public function playlistDownload($url, $flags): void
     {
         $pHtml = $this->consumeURL($url);
@@ -110,11 +118,13 @@ class Downloader{
                 print_r(array_values(array_unique($videoIds)));
 
                 if(strpos($flags[0], "showall") > 0){
-                    echo "WUT";
-                    // log error
+                    $this->dLogger->alert('Tried using the flag "-showall" when downloading a playlist');
+                    echo "Please refrain from using flag \"-showall\" when downloading a playlist";
+                    return;
                 }else if(sizeof($flags)>1){
-                    echo "WUT2";
-                    // log error
+                    $this->dLogger->alert('Tried multiple flags when downloading a playlist');
+                    echo "Please refrain from using multiple flags when downloading a playlist";
+                    return;
                 }else{
                     foreach(array_unique($videoIds) as $id){
                         $this->singleDownload("https://www.youtube.com/watch?v=".$id, $flags);
@@ -122,7 +132,7 @@ class Downloader{
                     return;
                 }
         }else{
-            // log error
+            $this->dLogger->error('Received $url->"'.$url.'" could not be consumed');
             return;
         }
     }
@@ -165,7 +175,7 @@ class Downloader{
     /*
     **  Function to filter download links based on a received flag
     **  @param $results -> download links
-    **  @param $flag -> filter
+    **  @param $flag -> type of extension preferred
     **  @return -> filtered results as array
     */
     private function filterResults($results, $flag)
@@ -199,8 +209,7 @@ class Downloader{
     }
     /*
     **  Function to get the extension for the file, from a array of possible links
-    **  @param $results -> download links
-    **  @param $flag -> filter
+    **  @param $object -> object received from the call to youtube-dl wrapper
     **  @return -> extension as string
     */
     private function getExtension($object)
@@ -251,7 +260,8 @@ class Downloader{
     /*
     **  Function to place downloaded bytes into a file
     **  @param $bytes -> bytes received after consuming the url
-    **  @param $fileLocation -> where to place the file (includes file name)
+    **  @param $fileLocation -> where to place the file
+    **  @param $fileName -> name for the file
     **  @return -> none
     */
     private function download($bytes, $fileLocation, $fileName): void
