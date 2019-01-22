@@ -45,7 +45,13 @@ class Downloader{
                     foreach ($possibleDls as $dl) {
                         echo "\t".$counter++.": ".$dl["type"]. " -> ".$this->shortenURL($dl["url"])."\n";
                     }
-                    $line = readline("Which one should be downloaded? (insert index number): ");
+                    if(!function_exists(readline)){
+                        if($prompt) echo $prompt;
+                        $fp = fopen("php://stdin","r");
+                        $line = rtrim(fgets($fp, 1024));
+                    }else{
+                        $line = readline("Which one should be downloaded? (insert index number): ");
+                    }
                     $chosen = $dls[intval($line)];
                     $ext = $this->getExtension($chosen);
                     $fileLocation = $this->getFileLocation();
