@@ -37,7 +37,8 @@ function parseArguments($arguments)
                 "\t-mp4: Extension Mp4; \n\t".
                 "\t-3gp: Extension 3gp; \n\t".
                 "\t-webm: Extension webm; \n\t".
-                "\t-m4a: Extension m4a; \n\t");
+                "\t-m4a: Extension m4a; \n\t".
+                "\t-thumbnail: Download the thumbnail of the video;");
                 break;
             case "-config": 
                 config($arguments, $mdLogger);
@@ -58,7 +59,7 @@ function config($mArg, $dLogger){
         switch($mArg[2]){
             case "-flag":
                 switch($mArg[3]){
-                    case "-v": case"-a": case"-av": case"-mp4": case"-3gp": case"-webm": case"-m4a":
+                    case "-v": case"-a": case"-av": case"-mp4": case"-3gp": case"-webm": case"-m4a": case"-thumbnail":
                     $cacher->store("flags",$mArg[3]);
                     break;
                 default:
@@ -69,7 +70,8 @@ function config($mArg, $dLogger){
                      "-mp4: Extension Mp4; \n\t".
                      "-3gp: Extension 3gp; \n\t".
                      "-webm: Extension webm; \n\t".
-                     "-m4a: Extension m4a;");
+                     "-m4a: Extension m4a; \n\t".
+                     "-thumbnail: Download the thumbnail of the video;");
                     break;
                 }
             break;
