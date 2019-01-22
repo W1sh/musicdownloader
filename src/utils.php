@@ -9,12 +9,15 @@ define('SEPARATOR_LINUX', '/');
 **  @param $prompt -> message to display in the console
 **  @return -> user input
 */
+if(!function_exists(readline)){
+
 function readline($prompt = null)
 {
     if($prompt) echo $prompt;
     $fp = fopen("php://stdin","r");
     $line = rtrim(fgets($fp, 1024));
     return $line;
+}
 }
 /*
 **  Function to create a folder
