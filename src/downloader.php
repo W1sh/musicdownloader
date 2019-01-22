@@ -31,7 +31,7 @@ class Downloader{
         }
         $info = $results["info"];
         $thumbnailURL = $info["Thumbnail"];
-        $vowels = array("/", "\\", "<", ">", ":", "\"", "|", "?", "*");
+        //$specialCharacters = array("/", "\\", "<", ">", ":", "\"", "|", "?", "*");
         $title = str_replace("/", "", $info["Title"]);
         $dls = $results["dl"];
 
@@ -131,6 +131,11 @@ class Downloader{
                 print_r($videoIds);
                 print_r(array_values(array_unique($videoIds)));
 
+                if(count($flags) == 0){
+                    $this->dLogger->alert('Tried to download a playlist with no flags given');
+                    echo "You must give a flag to download a playlist";
+                    return;
+                }
                 if(strpos($flags[0], "showall") > 0){
                     $this->dLogger->alert('Tried using the flag "-showall" when downloading a playlist');
                     echo "Please refrain from using flag \"-showall\" when downloading a playlist";
