@@ -30,6 +30,7 @@ class Downloader{
             return;
         }
         $info = $results["info"];
+        $thumbnailURL = $info["Thumbnail"];
         $vowels = array("/", "\\", "<", ">", ":", "\"", "|", "?", "*");
         $title = str_replace("/", "", $info["Title"]);
         $dls = $results["dl"];
@@ -44,7 +45,7 @@ class Downloader{
                     foreach ($possibleDls as $dl) {
                         echo "\t".$counter++.": ".$dl["type"]. " -> ".$this->shortenURL($dl["url"])."\n";
                     }
-                    $line = readline("Which one should downloaded? (insert index number): ");
+                    $line = readline("Which one should be downloaded? (insert index number): ");
                     $chosen = $dls[intval($line)];
                     $ext = $this->getExtension($chosen);
                     $fileLocation = $this->getFileLocation();
@@ -56,13 +57,18 @@ class Downloader{
                     break;    
             }
         }else{
-            if(strpos($flags[0], "showall") > 0){
+            if(strpos($flags[0], "thumbnail") > 0){
+                $needle = "/";
+                $indexOfLastSlash = strrpos($thumbnailURL, $needle);
+                $thumbnailName = substr($thumbnailURL, $indexOfLastSlash + strlen($needle));
+                $this->downloadThumbnail($thumbnailURL, $thumbnailName);
+            }else if(strpos($flags[0], "showall") > 0){
                 echo"Available urls:\n";
                 $counter = 0;
                 foreach ($dls as $dl) {
                     echo "\t".$counter++.": ".$dl["type"]. " -> ".$this->shortenURL($dl["url"])."\n";
                 }
-                $line = readline("Which one should downloaded? (insert index number): ");
+                $line = readline("Which one should be downloaded? (insert index number): ");
                 $chosen = $dls[intval($line)];
                 $ext = $this->getExtension($chosen);
                 $fileLocation = $this->getFileLocation();
@@ -87,6 +93,14 @@ class Downloader{
         }else{
             $this->dLogger->warning('Couldn\'t find a link to download.');
         }
+    }
+
+    public function downloadThumbnail($thumbnailURL, $title):void
+    {
+        $bytes = $this->consumeUrl($thumbnailURL);
+        $fileLocation = $this->getFileLocation();
+        file_put_contents($fileLocation.(php_uname("s") == "Windows NT" 
+            ? SEPARATOR_WIN : SEPARATOR_LINUX).$title, $bytes);
     }
     /*
     **  Function to download videos from a youtube playlist
